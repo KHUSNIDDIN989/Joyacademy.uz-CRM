@@ -1,0 +1,57 @@
+.drawe__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  background: #2f49d1;
+  color: #fff;
+}
+.IconButton {
+  color: #fff !important;
+}
+.drawe__header-p {
+  position: absolute;
+  left: 70px;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.859533px;
+}
+.drawe__header-contact {
+  position: absolute;
+  left: 20px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.226);
+  border-radius: 50%;
+  width: 35px !important;
+  height: 35px !important;
+  padding: 3px;
+}
+.row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.dark__mode {
+  position: absolute;
+  right: 94px;
+  width: 35px!important;
+  height: 35px!important;
+  background: #c4c4c4;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+}
+.bell {
+  position: absolute;
+  right: 32px;
+  width: 35px!important;
+  height: 35px!important;
+  background: #c4c4c4;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
