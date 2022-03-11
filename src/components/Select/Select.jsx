@@ -14,6 +14,7 @@ export default function SelectAutoWidth() {
   return (
     <div className="select">
       <Select
+        className="select__border"
         labelId='demo-simple-select-autowidth-label'
         id='demo-simple-select-autowidth'
         onChange={handleChange} 

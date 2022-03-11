@@ -1,5 +1,8 @@
 .select{
     position: absolute;
-    right: 180px;
-    border: none;
+    right: 160px;
+}
+
+.select__border{
+    height: 30px;
 }

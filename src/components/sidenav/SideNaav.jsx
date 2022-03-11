@@ -23,25 +23,18 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Statistika from "../../assets/images/statistika.png";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SelectAutoWidth from "../Select/Select";
+import Groups from "../groups/Groups";
+import { Routes, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Home from "../home/Home";
+import ToggleColorMode from "../darkmode/DarkMode";
+import Payments from "../payments/Payments";
+import Attendance from "../Attendance/Attendance"
 import "./SideNav.css";
 
 const drawerWidth = 240;
-
-const bull = (
-  <Box
-    component='span'
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}>
-    •
-  </Box>
-);
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -134,37 +127,39 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar
         style={{ background: "#fff", color: "#0061F7", fontWidth: "900" }}
-        position='fixed'
-        open={open}>
+        position="fixed"
+        open={open}
+      >
         <Toolbar>
           <IconButton
-            color='inherit'
-            aria-label='open drawer'
+            color="inherit"
+            aria-label="open drawer"
             onClick={handleDrawerOpen}
-            edge='start'
+            edge="start"
             sx={{
               marginRight: 5,
               ...(open && { display: "none" }),
-            }}>
+            }}
+          >
             <MenuIcon className={classes.title} />
           </IconButton>
-          <Typography variant='h6' noWrap component='div'>
+          <Typography className="typo" variant="h4" noWrap component="p">
             Xisobot
           </Typography>
           <SelectAutoWidth />
-          <Brightness4Icon className='dark__mode' />
-          <NotificationsNoneIcon className='bell' />
+          <ToggleColorMode className="dark__mode" />
+          <NotificationsNoneIcon className="bell" />
         </Toolbar>
       </AppBar>
-      <Drawer variant='permanent' open={open}>
-        <DrawerHeader className='drawe__header'>
-          <AccountBoxIcon className='drawe__header-contact' />
-          <p className='drawe__header-p'>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader className="drawe__header">
+          <AccountBoxIcon className="drawe__header-contact" />
+          <p className="drawe__header-p">
             {" "}
             CRM <br />
             PANEL
           </p>
-          <IconButton className='IconButton' onClick={handleDrawerClose}>
+          <IconButton className="IconButton" onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
@@ -176,45 +171,45 @@ export default function MiniDrawer() {
         <Divider />
         <Box style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}>
           <List>
-            {["Xisobot", "O’quvchilar"].map((text, index) => (
-              <ListItemButton button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <HomeIcon style={{ color: "#fff" }} />
-                  ) : (
-                    <SchoolSharpIcon style={{ color: "#fff" }} />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            ))}
-            {["Guruhlar", "To’lovlar"].map((text, index) => (
-              <ListItemButton button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <GroupsIcon style={{ color: "#fff" }} />
-                  ) : (
-                    <PaymentIcon style={{ color: "#fff" }} />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            ))}
-            {["Davomat"].map((text, index) => (
-              <ListItemButton button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <ContactsIcon style={{ color: "#fff" }} />
-                  ) : (
-                    <MailIcon />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            ))}
+            <ListItemButton button>
+              <NavLink to="/home" className="navlink">
+                <HomeIcon style={{ color: "#fff", marginRight: 30 }} />
+                Xisobot
+              </NavLink>
+            </ListItemButton>
+            <ListItemButton button>
+              <NavLink to="/studentes" className="navlink">
+                <SchoolSharpIcon style={{ color: "#fff", marginRight: 30 }} />
+                O’quvchilar
+              </NavLink>
+            </ListItemButton>
+            <ListItemButton button>
+              <NavLink to="/groups" className="navlink">
+                <GroupsIcon style={{ color: "#fff", marginRight: 30 }} />
+                Guruhlar
+              </NavLink>
+            </ListItemButton>
+            <ListItemButton button>
+              <NavLink to="/payments" className="navlink">
+                <PaymentIcon style={{ color: "#fff", marginRight: 30 }} />
+                To’lovlar
+              </NavLink>
+            </ListItemButton>
+            <ListItemButton button>
+              <NavLink to="/attendance" className="navlink">
+                <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
+                Davomat
+              </NavLink>
+            </ListItemButton>
           </List>
         </Box>
       </Drawer>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/groups" element={<Groups />} />
+        <Route path="/payments" element={<Payments />} />
+        <Route path="/Attendance" element={<Attendance />} />
+      </Routes>
     </Box>
   );
 }

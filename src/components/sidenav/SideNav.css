@@ -18,16 +18,17 @@
   font-size: 18px;
   line-height: 22px;
   letter-spacing: 0.859533px;
+  margin-top: 10px;
 }
 .drawe__header-contact {
   position: absolute;
-  left: 20px;
+  left: 18px;
   color: #fff;
   background: rgba(0, 0, 0, 0.226);
   border-radius: 50%;
   width: 35px !important;
   height: 35px !important;
-  padding: 3px;
+  padding: 5px;
 }
 .row {
   width: 100%;
@@ -38,8 +39,8 @@
 .dark__mode {
   position: absolute;
   right: 94px;
-  width: 35px!important;
-  height: 35px!important;
+  width: 35px !important;
+  height: 35px !important;
   background: #c4c4c4;
   border-radius: 50%;
   padding: 6px;
@@ -48,10 +49,29 @@
 .bell {
   position: absolute;
   right: 32px;
-  width: 35px!important;
-  height: 35px!important;
+  width: 35px !important;
+  height: 35px !important;
   background: #c4c4c4;
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
+}
+.typo {
+  font-family: "Inter" !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
+  line-height: 44px !important;
+  letter-spacing: 0.01em !important;
+  color: #0061f7 !important;
+}
+.navlink {
+  text-decoration: none;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 34px;
+  color: #ffffff;
+}
+.navlink:hover{
+  color: #fff;
 }
