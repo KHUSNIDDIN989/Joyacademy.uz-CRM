@@ -31,7 +31,8 @@ import { NavLink } from "react-router-dom";
 import Home from "../home/Home";
 import ToggleColorMode from "../darkmode/DarkMode";
 import Payments from "../payments/Payments";
-import Attendance from "../Attendance/Attendance";
+import Attendance1 from "../Attendance1/Attendance1";
+import Groups1 from "../Groups1/Groups1";
 import "./SideNav.css";
 
 const drawerWidth = 240;
@@ -184,7 +185,7 @@ export default function MiniDrawer() {
               </NavLink>
             </ListItemButton>
             <ListItemButton button>
-              <NavLink to="/groups" className="navlink">
+              <NavLink to="/groups1" className="navlink">
                 <GroupsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Guruhlar
               </NavLink>
@@ -196,7 +197,7 @@ export default function MiniDrawer() {
               </NavLink>
             </ListItemButton>
             <ListItemButton button>
-              <NavLink to="/attendance" className="navlink">
+              <NavLink to="/attendance1" className="navlink">
                 <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Davomat
               </NavLink>
@@ -207,9 +208,9 @@ export default function MiniDrawer() {
       <div className="wrapper">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/groups" element={<Groups />} />
+          <Route path="/groups1" element={<Groups1 />} />
           <Route path="/payments" element={<Payments />} />
-          <Route path="/Attendance" element={<Attendance />} />
+          <Route path="/Attendance1" element={<Attendance1 />} />
         </Routes>
       </div>
     </Box>
