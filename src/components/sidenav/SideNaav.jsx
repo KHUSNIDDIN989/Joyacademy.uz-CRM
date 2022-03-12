@@ -31,7 +31,7 @@ import { NavLink } from "react-router-dom";
 import Home from "../home/Home";
 import ToggleColorMode from "../darkmode/DarkMode";
 import Payments from "../payments/Payments";
-import Attendance from "../Attendance/Attendance"
+import Attendance from "../Attendance/Attendance";
 import "./SideNav.css";
 
 const drawerWidth = 240;
@@ -204,12 +204,14 @@ export default function MiniDrawer() {
           </List>
         </Box>
       </Drawer>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/groups" element={<Groups />} />
-        <Route path="/payments" element={<Payments />} />
-        <Route path="/Attendance" element={<Attendance />} />
-      </Routes>
+      <div className="wrapper">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/Attendance" element={<Attendance />} />
+        </Routes>
+      </div>
     </Box>
   );
 }

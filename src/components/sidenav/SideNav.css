@@ -72,6 +72,10 @@
   line-height: 34px;
   color: #ffffff;
 }
-.navlink:hover{
+.navlink:hover {
   color: #fff;
+}
+.wrapper {
+  background: #f0f2fa;
+  width: 100vw;
 }
