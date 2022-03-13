@@ -14,9 +14,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
 import SchoolSharpIcon from "@mui/icons-material/SchoolSharp";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -25,13 +22,12 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SelectAutoWidth from "../Select/Select";
-import Groups from "../groups/Groups";
 import { Routes, Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Home from "../home/Home";
 import ToggleColorMode from "../darkmode/DarkMode";
 import Payments from "../payments/Payments";
-import Attendance1 from "../Attendance1/Attendance1";
+import Attendance from "../Attendance/Attendance";
 import Groups1 from "../Groups1/Groups1";
 import "./SideNav.css";
 
@@ -197,7 +193,7 @@ export default function MiniDrawer() {
               </NavLink>
             </ListItemButton>
             <ListItemButton button>
-              <NavLink to="/attendance1" className="navlink">
+              <NavLink to="/attendance" className="navlink">
                 <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Davomat
               </NavLink>
@@ -210,7 +206,7 @@ export default function MiniDrawer() {
           <Route path="/" element={<Home />} />
           <Route path="/groups1" element={<Groups1 />} />
           <Route path="/payments" element={<Payments />} />
-          <Route path="/Attendance1" element={<Attendance1 />} />
+          <Route path="/Attendance" element={<Attendance />} />
         </Routes>
       </div>
     </Box>

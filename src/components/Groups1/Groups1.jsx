@@ -1,9 +1,8 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-
 import User from "../../assets/images/user.png";
-import "./Groups1.css"
-function Attendance() {
+import "./Groups1.css";
+function Groups1() {
   return (
     <div className="container">
       <div className="main my-5 pt-5">
@@ -58,11 +57,7 @@ function Attendance() {
                   <label for="inputState" className="col__label">
                     O’qituvchi tell nomeri
                   </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder=""
-                  />
+                  <input type="text" class="form-control" placeholder="" />
                 </div>
                 <div className="card w-50 m-2">
                   <label for="inputState" className="col__label">
@@ -76,8 +71,10 @@ function Attendance() {
                 </div>
               </div>
               <div className="card w-100 m-2 mt-3 card__btn">
-                  <button className="btn btn-primary btn__btn">To’lov qilish</button>
-                </div>
+                <button className="btn btn-primary btn__btn">
+                  To’lov qilish
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -335,4 +332,4 @@ function Attendance() {
   );
 }
 
-export default Attendance;
+export default Groups1;
