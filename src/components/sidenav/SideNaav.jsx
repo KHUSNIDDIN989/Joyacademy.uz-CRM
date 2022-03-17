@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
@@ -22,15 +21,15 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SelectAutoWidth from "../Select/Select";
-import { Routes, Route } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, useParams } from "react-router-dom";
 import Home from "../home/Home";
 import ToggleColorMode from "../darkmode/DarkMode";
 import Payments from "../payments/Payments";
 import Attendance from "../Attendance/Attendance";
 import Groups1 from "../Groups1/Groups1";
 import "./SideNav.css";
-
+import Studentes from "../studentes/Studentes";
+import * as React from "react";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -119,6 +118,8 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const titleNav = useParams();
+  console.log(titleNav);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -140,9 +141,12 @@ export default function MiniDrawer() {
           >
             <MenuIcon className={classes.title} />
           </IconButton>
-          <Typography className="typo" variant="h4" noWrap component="p">
-            Xisobot
-          </Typography>
+          <Typography
+            className="typo"
+            variant="h4"
+            noWrap
+            component="p"
+          ></Typography>
           <SelectAutoWidth />
           <ToggleColorMode className="dark__mode" />
           <NotificationsNoneIcon className="bell" />
@@ -203,7 +207,8 @@ export default function MiniDrawer() {
       </Drawer>
       <div className="wrapper">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/studentes" element={<Studentes />} />
           <Route path="/groups1" element={<Groups1 />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/Attendance" element={<Attendance />} />

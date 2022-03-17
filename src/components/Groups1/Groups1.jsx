@@ -11,7 +11,7 @@ function Groups1() {
           <form>
             <div class="form-row">
               <div class="col d-flex justify-content-between">
-                <div className="card w-50 m-2">
+                <div className=" w-50 m-2">
                   <label for="inputText" className="col__label">
                     Guruh yo’nalishi
                   </label>
@@ -20,7 +20,7 @@ function Groups1() {
                     <option>...</option>
                   </select>
                 </div>
-                <div className="card w-50 m-2">
+                <div className="w-50 m-2">
                   <label for="inputState" className="col__label">
                     Dars kunlari
                   </label>
@@ -30,7 +30,7 @@ function Groups1() {
                     placeholder="DU-CHOR-JUMA"
                   />
                 </div>
-                <div className="card w-50 m-2">
+                <div className="w-50 m-2">
                   <label for="inputText" className="col__label">
                     Dars vaqti
                   </label>
@@ -43,7 +43,7 @@ function Groups1() {
             </div>
             <div class="form-row mt-3">
               <div class="col d-flex justify-content-between">
-                <div className="card w-50 m-2">
+                <div className="w-50 m-2">
                   <label for="inputText" className="col__label">
                     O’qituvchi
                   </label>
@@ -53,13 +53,13 @@ function Groups1() {
                     placeholder=" Olimjonova Nargiza"
                   />
                 </div>
-                <div className="card w-50 m-2">
+                <div className="w-50 m-2">
                   <label for="inputState" className="col__label">
                     O’qituvchi tell nomeri
                   </label>
                   <input type="text" class="form-control" placeholder="" />
                 </div>
-                <div className="card w-50 m-2">
+                <div className="w-50 m-2">
                   <label for="inputState" className="col__label">
                     O’qituvchi tell nomeri
                   </label>
@@ -70,7 +70,7 @@ function Groups1() {
                   />
                 </div>
               </div>
-              <div className="card w-100 m-2 mt-3 card__btn">
+              <div className="w-100 m-2 p-3 mt-3 card__btn">
                 <button className="btn btn-primary btn__btn">
                   To’lov qilish
                 </button>
