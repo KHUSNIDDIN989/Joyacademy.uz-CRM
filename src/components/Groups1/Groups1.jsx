@@ -93,7 +93,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:
@@ -133,7 +133,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:
@@ -173,7 +173,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:
@@ -213,7 +213,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:
@@ -253,7 +253,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:
@@ -293,7 +293,7 @@ function Groups1() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" />
+                  <img src={User} className="w-25 h-25 mt-2" alt="" />
                   <div className="">
                     <p className="card__p ">
                       O’qituvchi:

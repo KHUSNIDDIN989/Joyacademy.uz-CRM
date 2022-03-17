@@ -1,14 +1,12 @@
 import React from "react";
 import "../header/Header.css";
-import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 const Header = () => {
-  let [siteHeading, setSiteHeading] = useState(`O'quvchilar`);
 
   return (
     <header className="header">
       <div className="container">
-        <h1 className="header__heading">{siteHeading}</h1>
+        <h1 className="header__heading">.</h1>
 
         <div className="header__top-controls">
           <select className="header__select">
