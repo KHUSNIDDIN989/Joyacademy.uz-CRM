@@ -9,63 +9,63 @@ function Groups1() {
         <div className="col-md-12 mt-3">
           <h1 className="col__h1">Yangi guruh qo’shish</h1>
           <form>
-            <div class="form-row">
-              <div class="col d-flex justify-content-between">
+            <div className="form-row">
+              <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
-                  <label for="inputText" className="col__label">
+                  <label htmlFor="inputText" className="col__label">
                     Guruh yo’nalishi
                   </label>
-                  <select id="inputState" class="form-control">
-                    <option selected>Ona-tili</option>
+                  <select id="inputState" className="form-control">
+                    <option defaultValue="">Ona-tili</option>
                     <option>...</option>
                   </select>
                 </div>
                 <div className="w-50 m-2">
-                  <label for="inputState" className="col__label">
+                  <label htmlFor="inputState" className="col__label">
                     Dars kunlari
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="DU-CHOR-JUMA"
                   />
                 </div>
                 <div className="w-50 m-2">
-                  <label for="inputText" className="col__label">
+                  <label htmlFor="inputText" className="col__label">
                     Dars vaqti
                   </label>
-                  <select id="inputState" class="form-control">
-                    <option selected>Ona-tili</option>
+                  <select id="inputState" className="form-control">
+                    <option defaultValue="">Ona-tili</option>
                     <option>...</option>
                   </select>
                 </div>
               </div>
             </div>
-            <div class="form-row mt-3">
-              <div class="col d-flex justify-content-between">
+            <div className="form-row mt-3">
+              <div className="col d-flex justify-content-between">
                 <div className="w-50 m-2">
-                  <label for="inputText" className="col__label">
+                  <label htmlFor="inputText" className="col__label">
                     O’qituvchi
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder=" Olimjonova Nargiza"
                   />
                 </div>
                 <div className="w-50 m-2">
-                  <label for="inputState" className="col__label">
+                  <label htmlFor="inputState" className="col__label">
                     O’qituvchi tell nomeri
                   </label>
-                  <input type="text" class="form-control" placeholder="" />
+                  <input type="text" className="form-control" placeholder="" />
                 </div>
                 <div className="w-50 m-2">
-                  <label for="inputState" className="col__label">
+                  <label htmlFor="inputState" className="col__label">
                     O’qituvchi tell nomeri
                   </label>
                   <input
                     type="file"
-                    class="form-control"
+                    className="form-control"
                     placeholder="+998 xx xxx xx xx"
                   />
                 </div>

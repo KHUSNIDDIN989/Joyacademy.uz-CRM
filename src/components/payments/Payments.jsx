@@ -11,63 +11,63 @@ function Payments() {
         <div className="col-md-12 mt-3">
           <h1 className="col__h1">To’lov qilish</h1>
           <form>
-            <div class="form-row">
-              <div class="col d-flex justify-content-between">
-                <div className="card w-50 m-2">
-                  <label for="inputText" className="col__label">
+            <div className="form-row">
+              <div className="col d-flex justify-content-between">
+                <div className=" w-50 m-2">
+                  <label htmlFor="inputText" className="col__label">
                     O’quvchi ismi
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Muxamadaliyev Ibroxim"
                   />
                 </div>
-                <div className="card w-50 m-2">
-                  <label for="inputState" className="col__label">
+                <div className=" w-50 m-2">
+                  <label htmlFor="inputState" className="col__label">
                     Yo’nalish
                   </label>
-                  <select id="inputState" class="form-control">
-                    <option selected>Ona-tili</option>
+                  <select id="inputState" className="form-control">
+                    <option defaultValue="">Ona-tili</option>
                     <option>...</option>
                   </select>
                 </div>
-                <div className="card w-50 m-2">
-                  <label for="inputText" className="col__label">
+                <div className=" w-50 m-2">
+                  <label htmlFor="inputText" className="col__label">
                     Telefon raqam
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="+998 xx xxx xx xx"
                   />
                 </div>
               </div>
             </div>
-            <div class="form-row mt-3">
-              <div class="col d-flex justify-content-between">
-                <div className="card w-50 m-2">
-                  <label for="inputText" className="col__label">
+            <div className="form-row mt-3">
+              <div className="col d-flex justify-content-between">
+                <div className=" w-50 m-2">
+                  <label htmlFor="inputText" className="col__label">
                     O’qituvchi ismi
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder=" Olimjonova Nargiza"
                   />
                 </div>
-                <div className="card w-50 m-2">
-                  <label for="inputState" className="col__label">
+                <div className=" w-50 m-2">
+                  <label htmlFor="inputState" className="col__label">
                     To’lov qilayotgan kun
                   </label>
                   <input
                     type="date"
-                    class="form-control"
+                    className="form-control"
                     placeholder="+998 xx xxx xx xx"
                   />
                 </div>
-                <div className="card w-50 m-2">
-                  <label for="inputText" className="col__label">
+                <div className="d-flex flex-column w-50 m-2">
+                  <label htmlFor="inputText" className="col__label">
                     Telefon raqam
                   </label>
                   <button className="btn btn-primary">To’lov qilish</button>
@@ -93,7 +93,7 @@ function Payments() {
               boxShadow: " 0px 10px 25px rgba(0, 0, 0, 0.25)",
             }}
           >
-            <table class="table table-striped table-hover h-25">
+            <table className="table table-striped table-hover h-25">
               <thead>
                 <tr
                   style={{
@@ -107,7 +107,7 @@ function Payments() {
                   <th scope="col">Telefon nomer</th>
                   <th scope="col">Yo’nalish</th>
                   <th scope="col">O’qituvchisi</th>
-                  <th scope="col" colSpan="2">
+                  <th scope="col" colSpan={2}>
                     To’lov vaqti
                   </th>
                 </tr>
@@ -228,7 +228,7 @@ function Payments() {
           </div>
         </div>
         <div className="col-md-12 d-flex justify-content-end align-items-center my-5">
-        <p className="pt-3 col__jami">JAMI 100 ta</p>
+          <p className="pt-3 col__jami">JAMI 100 ta</p>
           <Stack spacing={2} className="mr-5 pr-5">
             <Pagination count={10} color="primary" />
           </Stack>

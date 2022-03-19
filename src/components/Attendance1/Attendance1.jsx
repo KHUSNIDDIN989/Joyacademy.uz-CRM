@@ -69,7 +69,7 @@ function Attendance1() {
                 boxShadow: " 0px 10px 25px rgba(0, 0, 0, 0.25)",
               }}
             >
-              <table class="table table-striped table-hover">
+              <table className="table table-striped table-hover">
                 <thead>
                   <tr
                     style={{
@@ -103,65 +103,65 @@ function Attendance1() {
                   </tr>
                   <tr>
                     <th scope="row">3</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">4</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">5</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">6</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">7</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">8</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">9</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">10</th>
-                    <td colspan="1">Muxamadaliyev Ibroxim</td>
+                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
                     <td>
                       <input type="checkbox" />
                     </td>
                   </tr>
                 </tbody>
-                <div className="card__table-btn ">
-                  <button className="btn btn-primary m-3 ">Saqlash</button>
-                </div>
               </table>
+              <div className="card__table-btn ">
+                <button className="btn btn-primary m-3 ">Saqlash</button>
+              </div>
             </div>
           </div>
         </div>

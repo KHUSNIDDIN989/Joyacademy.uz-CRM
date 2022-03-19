@@ -1,18 +1,22 @@
+import * as React from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
+import ListItemButton from "@mui/material/ListItemButton";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+
 import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItemButton from "@mui/material/ListItemButton";
 import HomeIcon from "@mui/icons-material/Home";
 import SchoolSharpIcon from "@mui/icons-material/SchoolSharp";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -20,16 +24,18 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SelectAutoWidth from "../Select/Select";
-import { Routes, Route, NavLink, useParams } from "react-router-dom";
+
 import Home from "../home/Home";
-import ToggleColorMode from "../darkmode/DarkMode";
-import Payments from "../payments/Payments";
-import Attendance from "../Attendance/Attendance";
-import Groups1 from "../Groups1/Groups1";
-import "./SideNav.css";
 import Studentes from "../studentes/Studentes";
-import * as React from "react";
+import Payments from "../payments/Payments";
+import SelectAutoWidth from "../Select/Select";
+import Groups from "../groups/Groups"
+import Groups1 from "../Groups1/Groups1";
+import Attendance from "../Attendance/Attendance";
+import Attendance1 from "../Attendance1/Attendance1";
+import ToggleColorMode from "../darkmode/DarkMode";
+
+import "./SideNav.css";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -118,8 +124,6 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  const titleNav = useParams();
-  console.log(titleNav);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -172,31 +176,31 @@ export default function MiniDrawer() {
         <Divider />
         <Box style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}>
           <List>
-            <ListItemButton button>
-              <NavLink to="/home" className="navlink">
+            <ListItemButton>
+              <NavLink to="/" className="navlink">
                 <HomeIcon style={{ color: "#fff", marginRight: 30 }} />
                 Xisobot
               </NavLink>
             </ListItemButton>
-            <ListItemButton button>
+            <ListItemButton>
               <NavLink to="/studentes" className="navlink">
                 <SchoolSharpIcon style={{ color: "#fff", marginRight: 30 }} />
                 O’quvchilar
               </NavLink>
             </ListItemButton>
-            <ListItemButton button>
+            <ListItemButton>
               <NavLink to="/groups1" className="navlink">
                 <GroupsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Guruhlar
               </NavLink>
             </ListItemButton>
-            <ListItemButton button>
+            <ListItemButton>
               <NavLink to="/payments" className="navlink">
                 <PaymentIcon style={{ color: "#fff", marginRight: 30 }} />
                 To’lovlar
               </NavLink>
             </ListItemButton>
-            <ListItemButton button>
+            <ListItemButton>
               <NavLink to="/attendance" className="navlink">
                 <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Davomat
@@ -207,11 +211,14 @@ export default function MiniDrawer() {
       </Drawer>
       <div className="wrapper">
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/studentes" element={<Studentes />} />
+          <Route path="/studentes" element={<Studentes />} />
+          <Route path="/groups" element={<Groups />} />
           <Route path="/groups1" element={<Groups1 />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/Attendance" element={<Attendance />} />
+          <Route path="/Attendance1" element={<Attendance1 />} />
         </Routes>
       </div>
     </Box>
