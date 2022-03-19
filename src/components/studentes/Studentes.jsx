@@ -143,7 +143,6 @@ function Studentes() {
                 {students?.map((i) => {
                   return (
                     <tr key={Math.random()}>
-                      {console.log(i)}
                       <th scope="row">{i.student_id}</th>
                       <td>{i.parents_name}</td>
                       <td>{i.parents_phone}</td>

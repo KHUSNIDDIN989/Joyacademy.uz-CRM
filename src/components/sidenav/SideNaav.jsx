@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -29,7 +30,7 @@ import Home from "../home/Home";
 import Studentes from "../studentes/Studentes";
 import Payments from "../payments/Payments";
 import SelectAutoWidth from "../Select/Select";
-import Groups from "../groups/Groups"
+import Groups from "../groups/Groups";
 import Groups1 from "../Groups1/Groups1";
 import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
@@ -113,6 +114,9 @@ const useStyles = makeStyles({
 });
 
 export default function MiniDrawer() {
+  const [title, setTitle] = useState(
+    window.localStorage.getItem("title" || "yuq")
+  );
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
@@ -123,6 +127,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  window.localStorage.setItem("title", title);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -145,12 +150,9 @@ export default function MiniDrawer() {
           >
             <MenuIcon className={classes.title} />
           </IconButton>
-          <Typography
-            className="typo"
-            variant="h4"
-            noWrap
-            component="p"
-          ></Typography>
+          <Typography className="typo" variant="h4" noWrap component="p">
+            {title}
+          </Typography>
           <SelectAutoWidth />
           <ToggleColorMode className="dark__mode" />
           <NotificationsNoneIcon className="bell" />
@@ -172,36 +174,59 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
-
         <Divider />
         <Box style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}>
           <List>
             <ListItemButton>
-              <NavLink to="/" className="navlink">
+              <NavLink
+                onClick={() => {
+                  setTitle("Xisobot");
+                }}
+                to="/"
+                className="navlink"
+              >
                 <HomeIcon style={{ color: "#fff", marginRight: 30 }} />
                 Xisobot
               </NavLink>
             </ListItemButton>
             <ListItemButton>
-              <NavLink to="/studentes" className="navlink">
+              <NavLink
+                onClick={() => {
+                  setTitle("O’quvchilar");
+                }}
+                to="/studentes"
+                className="navlink"
+              >
                 <SchoolSharpIcon style={{ color: "#fff", marginRight: 30 }} />
                 O’quvchilar
               </NavLink>
             </ListItemButton>
             <ListItemButton>
-              <NavLink to="/groups1" className="navlink">
+              <NavLink
+                onClick={() => setTitle("Guruhlar")}
+                to="/groups1"
+                className="navlink"
+              >
                 <GroupsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Guruhlar
               </NavLink>
             </ListItemButton>
             <ListItemButton>
-              <NavLink to="/payments" className="navlink">
+              <NavLink
+                onClick={() => setTitle("To’lovlar")}
+                to="/payments"
+                className="navlink"
+              >
                 <PaymentIcon style={{ color: "#fff", marginRight: 30 }} />
                 To’lovlar
               </NavLink>
             </ListItemButton>
             <ListItemButton>
-              <NavLink to="/attendance" className="navlink">
+              <NavLink
+                onClick={() => setTitle("Davomat")}
+                to="/attendance"
+                className="navlink"
+              >
                 <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
                 Davomat
               </NavLink>
