@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ff57e81a-4511-49b1-ad07-4a222163ea2b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Select/Select.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Select/Select.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Select/Select.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Select/Select.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sidenav/SideNaav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidenav/SideNaav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sidenav/SideNav.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sidenav/SideNav.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/studentes/Studentes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/studentes/Studentes.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26m1sZbdTUz6GTYwipJKqdiY5Lu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff57e81a-4511-49b1-ad07-4a222163ea2b" name="Changes" comment="" />
+      <created>1648014181555</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648014181555</updated>
+      <workItem from="1648014181555" duration="99000" />
+    </task>
+    <servers />
+  </component>
+</project>

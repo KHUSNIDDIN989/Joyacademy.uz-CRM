@@ -5,22 +5,79 @@ import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./Studentes.css";
+
 function Studentes() {
   const [students, setStudents] = useState([]);
+  const [studentName, setStudentName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [option, setOption] = useState("");
+  const [parentName, setParentName] = useState("");
+  const [parentPhone, setParentPhone] = useState("");
+  const [file, setFile] = useState();
+  const [hendleDelete, setHendleDelete] = useState(null);
   const [search, setSearch] = useState("");
-  console.log(search);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    fetch(`https://crm-joygroup.herokuapp.com/students`)
+    fetch(
+      `https://crm-joygroup.herokuapp.com/students?search=${search}&page=${page}`
+    )
       .then((res) => res.json())
       .then((data) => setStudents(data));
+  }, [search, page, hendleDelete]);
+  console.log(students);
+  console.log(hendleDelete);
+  
+  const PostForm = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("student_name", studentName);
+    formData.append("student_phone", phoneNumber);
+    formData.append("parents_name", parentName);
+    formData.append("parents_phone", parentPhone);
+    formData.append("group_id", option);
+    formData.append("file", file);
+    formData.append("username", "salom");
+    console.log(file);
+
+    fetch(`https://crm-joygroup.herokuapp.com/students`, {
+      method: "POST",
+      body: formData,
+    }).then((res) => res.json().then((data) => console.log(data)));
+
+    // setPhoneNumber(e.target.number.value);
+    // setOption(e.target.select.value);
+    // setParentName(e.target.parentName.value);
+    // setParentPhone(e.target.parentPhone.value);
+    // e.target.text.value = "";
+    // e.target.number.value = "";
+    // e.target.select.value = 1;
+    // e.target.parentName.value = "";
+    // e.target.parentPhone.value = "";
+  };
+
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/students?student_id=${hendleDelete}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }, []);
+
+  const hendleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.search.value);
+
+    e.target.search.value = "";
+  };
 
   return (
     <div className="container">
       <div className="main my-5 pt-5">
         <div className="col-md-12 mt-3">
           <h1 className="col__h1">Yangi o’quvchi qo’shish</h1>
-          <form>
+          <form onSubmit={(e) => PostForm(e)}>
             <div className="form-row">
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
@@ -28,6 +85,8 @@ function Studentes() {
                     O’quvchi ismi
                   </label>
                   <input
+                    onChange={(e) => setStudentName(e.target.value)}
+                    name="text"
                     type="text"
                     className="form-control"
                     placeholder="O’quvchi ismi"
@@ -38,18 +97,28 @@ function Studentes() {
                     Telefon raqam
                   </label>
                   <input
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    name="number"
                     type="number"
                     className="form-control"
-                    placeholder="Telefon raqam"
+                    placeholder="+998 xx xxx xx xx"
                   />
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
                     Yo’nalish
                   </label>
-                  <select id="inputState" className="form-control">
-                    <option defaultValue="">Ona-tili</option>
-                    <option>...</option>
+                  <select
+                    id="inputState"
+                    className="form-control"
+                    name="select"
+                    onChange={(e) => setOption(e.target.value)}
+                  >
+                    <option value="1">Foundation</option>
+                    <option value="2">Java</option>
+                    <option value="3">NodeJS</option>
+                    <option value="4">Flutter</option>
+                    <option value="5">JavaScript</option>
                   </select>
                 </div>
               </div>
@@ -61,6 +130,8 @@ function Studentes() {
                     Ota-onasi ismi
                   </label>
                   <input
+                    onChange={(e) => setParentName(e.target.value)}
+                    name="parentName"
                     type="text"
                     className="form-control"
                     placeholder=" Ota-onasi ismi"
@@ -71,9 +142,12 @@ function Studentes() {
                     Ota onasi nomeri
                   </label>
                   <input
+                    onChange={(e) => setParentPhone(e.target.value)}
+                    name="parentPhone"
                     type="number"
                     className="form-control"
-                    placeholder="Ota onasi nomeri"
+                    defaultValue="+998 "
+                    placeholder="+998 xx xxx xx xx"
                   />
                 </div>
                 <div className="w-50 m-2">
@@ -81,9 +155,11 @@ function Studentes() {
                     Rasm 3x4
                   </label>
                   <input
+                    name="file"
                     type="file"
+                    id="file"
                     className="form-control"
-                    placeholder="+998 xx xxx xx xx"
+                    onChange={(e) => setFile(e.target.files[0])}
                   />
                 </div>
               </div>
@@ -100,17 +176,15 @@ function Studentes() {
           <h3 className="col__h3">
             To’lov qilganlar<span>(shu oy bo’yicha)</span>{" "}
           </h3>
-          <div className="col__img-input">
+          <form onSubmit={(e) => hendleSearch(e)} className="col__img-input">
             <SearchIcon className="col__search" />
             <input
-              type="text"
-              onKeyPress={(e) => {
-                setSearch(e.target.value);
-              }}
+              name="search"
+              type="search"
               className="col__input"
               placeholder="Qidiruv"
             />
-          </div>
+          </form>
         </div>
         <div className="col-md-12 ">
           <div
@@ -120,7 +194,7 @@ function Studentes() {
               boxShadow: " 0px 10px 25px rgba(0, 0, 0, 0.25)",
             }}
           >
-            <table className="table table-striped table-hover h-25">
+            <table className="table table-striped table-hover h-25 p-5">
               <thead>
                 <tr
                   style={{
@@ -139,30 +213,39 @@ function Studentes() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {students?.map((i) => {
-                  return (
-                    <tr key={Math.random()}>
-                      <th scope="row">{i.student_id}</th>
-                      <td>{i.parents_name}</td>
-                      <td>{i.parents_phone}</td>
-                      <td>Matematika</td>
-                      <td>{i.teacher_name} (F.I.SH)</td>
-                      <td>{i.create_student_date}</td>
-                      <td>
-                        <DeleteIcon className="delete" />
-                      </td>
-                    </tr>
-                  );
-                })}
+              <tbody className="">
+                {students &&
+                  students?.map((i, index) => {
+                    return (
+                      <tr key={Math.random()}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{i.student_name}</td>
+                        <td>{i.student_phone}</td>
+                        <td>{i.group_name}</td>
+                        <td>{i.parents_name} (F.I.SH)</td>
+                        <td>{i.create_student_date}</td>
+                        <td>
+                          <DeleteIcon
+                            onClick={() => setHendleDelete(i.student_id)}
+                            className="delete"
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
         </div>
         <div className="col-md-12 d-flex justify-content-end align-items-center my-5">
-          <p className="pt-3 col__jami">JAMI 100 ta</p>
+          <p className="pt-3 col__jami">JAMI {students.length} ta</p>
           <Stack spacing={2} className="mr-5 pr-5">
-            <Pagination count={10} color="primary" />
+            <Pagination
+              count={students.length || 100}
+              color="primary"
+              defaultValue={1}
+              onChange={(e) => setPage(e.target.textContent)}
+            />
           </Stack>
         </div>
       </div>

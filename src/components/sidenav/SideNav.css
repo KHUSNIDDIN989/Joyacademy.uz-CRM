@@ -47,8 +47,7 @@
   cursor: pointer;
 }
 .bell {
-  position: absolute;
-  right: 32px;
+  
   width: 35px !important;
   height: 35px !important;
   background: #c4c4c4;
@@ -78,4 +77,11 @@
 .wrapper {
   background: #f0f2fa;
   width: 100vw;
+}
+.active {
+  border-right: 2px solid;
+  background: #01265f;
+  width: 100%;
+  color: #fff;
+  padding: 0 5px;
 }

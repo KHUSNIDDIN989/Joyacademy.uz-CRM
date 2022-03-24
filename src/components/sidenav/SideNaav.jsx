@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -34,8 +34,7 @@ import Groups from "../groups/Groups";
 import Groups1 from "../Groups1/Groups1";
 import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
-import ToggleColorMode from "../darkmode/DarkMode";
-
+import DarkMode from "../../assets/images/icon-sun.png"
 import "./SideNav.css";
 const drawerWidth = 240;
 
@@ -115,19 +114,26 @@ const useStyles = makeStyles({
 
 export default function MiniDrawer() {
   const [title, setTitle] = useState(
-    window.localStorage.getItem("title" || "yuq")
+    window.localStorage.getItem("title") || "Xisobot"
   );
+  const [data, setData] = useState(
+    window.localStorage.getItem("data") || "students"
+  );
+  window.localStorage.setItem("title", title);
+  window.localStorage.setItem("data", data);
+
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const classes = useStyles();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
+ 
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  window.localStorage.setItem("title", title);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -150,19 +156,22 @@ export default function MiniDrawer() {
           >
             <MenuIcon className={classes.title} />
           </IconButton>
-          <Typography className="typo" variant="h4" noWrap component="p">
-            {title}
-          </Typography>
-          <SelectAutoWidth />
-          <ToggleColorMode className="dark__mode" />
-          <NotificationsNoneIcon className="bell" />
+          <div className=" d-flex justify-content-between w-100">
+            <Typography className="typo" variant="h4" noWrap component="p">
+              {title}
+            </Typography>
+            <div className="d-flex align-items-center w-25 justify-content-evenly">
+              <SelectAutoWidth />
+              <img src={DarkMode} className="bell" alt=""/>
+              <NotificationsNoneIcon className="bell" />
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader className="drawe__header">
           <AccountBoxIcon className="drawe__header-contact" />
           <p className="drawe__header-p">
-            {" "}
             CRM <br />
             PANEL
           </p>
@@ -177,7 +186,7 @@ export default function MiniDrawer() {
         <Divider />
         <Box style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}>
           <List>
-            <ListItemButton>
+            <ListItemButton className="active">
               <NavLink
                 onClick={() => {
                   setTitle("Xisobot");
@@ -193,6 +202,7 @@ export default function MiniDrawer() {
               <NavLink
                 onClick={() => {
                   setTitle("O’quvchilar");
+                  setData("students");
                 }}
                 to="/studentes"
                 className="navlink"
@@ -203,7 +213,10 @@ export default function MiniDrawer() {
             </ListItemButton>
             <ListItemButton>
               <NavLink
-                onClick={() => setTitle("Guruhlar")}
+                onClick={() => {
+                  setTitle("Guruhlar");
+                  setData("students");
+                }}
                 to="/groups1"
                 className="navlink"
               >
@@ -213,7 +226,10 @@ export default function MiniDrawer() {
             </ListItemButton>
             <ListItemButton>
               <NavLink
-                onClick={() => setTitle("To’lovlar")}
+                onClick={() => {
+                  setTitle("To’lovlar");
+                  setData("students");
+                }}
                 to="/payments"
                 className="navlink"
               >
@@ -223,7 +239,10 @@ export default function MiniDrawer() {
             </ListItemButton>
             <ListItemButton>
               <NavLink
-                onClick={() => setTitle("Davomat")}
+                onClick={() => {
+                  setData("students");
+                  setTitle("Davomat");
+                }}
                 to="/attendance"
                 className="navlink"
               >

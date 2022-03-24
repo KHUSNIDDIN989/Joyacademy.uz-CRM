@@ -1,13 +1,13 @@
 import "./App.css";
 
-import Header from "./components/header/Header";
 import PersistentDrawerLeft from "./components/sidenav/SideNaav";
+import { ContextData} from "./context/ContextData";
 function App() {
   return (
     <>
-      <PersistentDrawerLeft/>
-
-      
+      <ContextData>
+        <PersistentDrawerLeft />
+      </ContextData>
     </>
   );
 }

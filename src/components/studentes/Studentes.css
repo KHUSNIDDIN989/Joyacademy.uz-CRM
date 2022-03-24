@@ -2,3 +2,6 @@
     color: #B30000;
     cursor: pointer;
 }
+.col__input{
+    padding: 0 10px;
+}
