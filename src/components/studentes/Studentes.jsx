@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
 import Delete from "../../assets/images/delete.png";
 import "./Studentes.css";
+import { useSelector } from "react-redux";
+import { lang } from "../store/Slices/data/languaages";
 
 function Studentes() {
   const [students, setStudents] = useState([]);
@@ -20,7 +22,7 @@ function Studentes() {
   const [posts, setPosts] = useState([]);
 
 console.log(students)
-
+   
   useEffect(() => {
     fetch(
       `https://crm-joygroup.herokuapp.com/students?search=${search}&page=${page}`
@@ -71,18 +73,19 @@ console.log(students)
 
     e.target.search.value = "";
   };
-
+  //language 
+  const language = useSelector(state=>state.language.currentLanguage)
   return (
     <div className="container">
       <div className="main my-5 pt-5">
         <div className="col-md-12 mt-3">
-          <h1 className="col__h1">Yangi o’quvchi qo’shish</h1>
+          <h1 className="col__h1">{ language.addNewStudent}</h1>
           <form onSubmit={(e) => PostForm(e)}>
             <div className="form-row">
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
                   <label htmlFor="text" className="col__label">
-                    O’quvchi ismi
+               {language.studentName}
                   </label>
                   <input
                     onChange={(e) => setStudentName(e.target.value)}
@@ -94,7 +97,7 @@ console.log(students)
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    Telefon raqam
+                   {language.tel}
                   </label>
                   <input
                     onChange={(e) => setPhoneNumber(e.target.value)}
@@ -106,7 +109,7 @@ console.log(students)
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Yo’nalish
+                   {language.field}
                   </label>
                   <select
                     id="inputState"
@@ -127,7 +130,7 @@ console.log(students)
               <div className="col d-flex justify-content-between">
                 <div className="w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Ota-onasi ismi
+                   {language.parentName}
                   </label>
                   <input
                     onChange={(e) => setParentName(e.target.value)}
@@ -139,7 +142,7 @@ console.log(students)
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    Ota onasi nomeri
+                    {language.parentsTel}
                   </label>
                   <input
                     onChange={(e) => setParentPhone(e.target.value)}
@@ -151,7 +154,7 @@ console.log(students)
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    Rasm 3x4
+                    {language.rasm}
                   </label>
                   <input
                     name="file"
@@ -163,14 +166,14 @@ console.log(students)
                 </div>
               </div>
               <div className="w-100 m-2 p-3 mt-3 card__btn">
-                <button className="btn btn-primary btn__btn">Qo’shish</button>
+                <button className="btn btn-primary btn__btn">{ language.addNewStudent}</button>
               </div>
             </div>
           </form>
         </div>
 
         <div className="col-md-12 d-flex justify-content-between mt-5 pt-5 mb-3">
-          <h3 className="col__h3">Bizning o’quvchilar</h3>
+          <h3 className="col__h3">{ language.ourStudents}</h3>
           <form onSubmit={(e) => hendleSearch(e)} className="col__img-input">
             <SearchIcon className="col__search" />
             <input
@@ -199,12 +202,12 @@ console.log(students)
                   }}
                 >
                   <th scope="col">№</th>
-                  <th scope="col">O’quvchi ismi</th>
-                  <th scope="col">Telefon nomer</th>
-                  <th scope="col">Yo’nalish</th>
-                  <th scope="col">Ota-ona(F.I.SH)</th>
+                  <th scope="col">{ language.studentName}</th>
+                  <th scope="col">{ language.tel}</th>
+                  <th scope="col">{ language.field}</th>
+                  <th scope="col">{ language.parentName}</th>
                   <th scope="col" colSpan="2">
-                    Ota-ona (Tel)
+                    {language.parentsTel}
                   </th>
                 </tr>
               </thead>
@@ -236,7 +239,7 @@ console.log(students)
           </div>
         </div>
         <div className="col-md-12 d-flex justify-content-end align-items-center my-5">
-          <p className="pt-3 col__jami">JAMI {students.length} ta</p>
+          <p className="pt-3 col__jami">{language.all} {students.length} </p>
           <Stack spacing={2} className="mr-5 pr-5">
             <Pagination
               count={students.length || 100}

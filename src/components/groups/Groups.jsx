@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import User from "../../assets/images/user.png";
+import { lang } from "../store/Slices/data/languaages";
 import "./Groups.css";
 function Groups() {
+  const language = useSelector(state => state.language.currentLanguage);
   return (
     <div className='container'>
       <div className='main mt-5 pt-4'>
-        <h2 className='mt-3 main__h2'>Informatika guruhi ro’yhati</h2>
+        <h2 className='mt-3 main__h2'>{ language.groupList}</h2>
         <div className='row mt-3'>
           <div className='col-md-4'>
             <div className='card h-100 card__card '>
@@ -17,31 +20,31 @@ function Groups() {
                   <img src={User} className='w-25 h-25 mt-2' alt=""/>
                   <div className=''>
                     <p className='card__p '>
-                      O’qituvchi:
+                     {language.teacher}:
                       <span className='card__span padding'>
                         Muxamadaliyev Ibroxim
                       </span>
                     </p>
                     <p className='card__p'>
-                      Tell raqam:{" "}
+                      {language.tel}:{" "}
                       <span className='card__span '>+998900113861</span>
                     </p>
                   </div>
                 </div>
                 <div className='d-flex justify-content-between'>
-                  <p className='card__p'>Dars kunlari:</p>
+                  <p className='card__p'>{ language.lessonDays}:</p>
                   <p className='card__span'>DU-CHOR-JUMA</p>
                 </div>
                 <div className='d-flex justify-content-between'>
-                  <p className='card__p'>Dars vaqti:</p>
+                  <p className='card__p'>{language.lessonTime}:</p>
                   <p className='card__span'>14:00-16:00</p>
                 </div>
                 <div className='d-flex justify-content-between'>
-                  <p className='card__p'>O’quvchilar soni</p>
+                  <p className='card__p'>{ language.numberstudents}</p>
                   <p className='card__span'>25ta</p>
                 </div>
                 <div className='d-flex justify-content-between'>
-                  <p className='card__p'>To’lov qilganlar</p>
+                  <p className='card__p'>{ language.thosePaid}</p>
                   <p className='card__span'>10ta</p>
                 </div>
               </div>

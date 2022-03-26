@@ -4,18 +4,20 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import "./Payments.css";
+import { useSelector } from "react-redux";
 function Payments() {
+  const language = useSelector(state => state.language.currentLanguage);
   return (
     <div className="container">
       <div className="main mt-5 pt-5">
         <div className="col-md-12 mt-3">
-          <h1 className="col__h1">To’lov qilish</h1>
+          <h1 className="col__h1">{ language.paypentTitle}</h1>
           <form>
             <div className="form-row">
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    O’quvchi ismi
+                    {language.studentName}
                   </label>
                   <input
                     type="text"
@@ -25,7 +27,7 @@ function Payments() {
                 </div>
                 <div className=" w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    Yo’nalish
+                    {language.field}
                   </label>
                   <select id="inputState" className="form-control">
                     <option defaultValue="">Ona-tili</option>
@@ -34,7 +36,7 @@ function Payments() {
                 </div>
                 <div className=" w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Telefon raqam
+                    {language.tel}
                   </label>
                   <input
                     type="text"
@@ -48,7 +50,7 @@ function Payments() {
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    O’qituvchi ismi
+                   {language.teacher}
                   </label>
                   <input
                     type="text"
@@ -58,7 +60,7 @@ function Payments() {
                 </div>
                 <div className=" w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    To’lov qilayotgan kun
+                    {language.paymentDate}
                   </label>
                   <input
                     type="date"
@@ -68,9 +70,9 @@ function Payments() {
                 </div>
                 <div className="d-flex flex-column w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Telefon raqam
+                    {language.tel}
                   </label>
-                  <button className="btn btn-primary">To’lov qilish</button>
+                  <button className="btn btn-primary">{ language.paymentTitle}</button>
                 </div>
               </div>
             </div>
@@ -78,7 +80,7 @@ function Payments() {
         </div>
         <div className="col-md-12 d-flex justify-content-between mt-5 pt-5 mb-3">
           <h3 className="col__h3">
-            To’lov qilganlar<span>(shu oy bo’yicha)</span>{" "}
+             {language.thosePaid}
           </h3>
           <div className="col__img-input">
             <SearchIcon className="col__search" />
@@ -103,12 +105,12 @@ function Payments() {
                   }}
                 >
                   <th scope="col">№</th>
-                  <th scope="col">O’quvchi ismi</th>
-                  <th scope="col">Telefon nomer</th>
-                  <th scope="col">Yo’nalish</th>
-                  <th scope="col">O’qituvchisi</th>
+                  <th scope="col">{ language.studentName}</th>
+                  <th scope="col">{language.tel}</th>
+                  <th scope="col">{ language.field}</th>
+                  <th scope="col">{ language.teacher}</th>
                   <th scope="col" colSpan={2}>
-                    To’lov vaqti
+                    {language.paymentDate}
                   </th>
                 </tr>
               </thead>

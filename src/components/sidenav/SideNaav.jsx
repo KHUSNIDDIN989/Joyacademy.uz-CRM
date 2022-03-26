@@ -36,6 +36,7 @@ import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
 import DarkMode from "../../assets/images/icon-sun.png"
 import "./SideNav.css";
+import {useSelector} from 'react-redux'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -135,6 +136,26 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  //language
+  const {currentLanguage : language} = useSelector(state => state.language);
+  console.log(language);
+  const [menu, setMenu] = useState('report')
+  useEffect(() => {
+    switch (menu) {
+      case "report":
+        return setTitle(language.report);
+      case "students":
+        return setTitle(language.students);
+      case "groups":
+        return setTitle(language.groups);
+      case "attendence":
+        return setTitle(language.attendence);
+      case "payments":
+        return setTitle(language.payments);
+    }
+    
+  }, [language])
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -162,7 +183,7 @@ export default function MiniDrawer() {
             </Typography>
             <div className="d-flex align-items-center w-25 justify-content-evenly">
               <SelectAutoWidth />
-              <img src={DarkMode} className="bell" alt=""/>
+              <img src={DarkMode} className="bell" alt="" />
               <NotificationsNoneIcon className="bell" />
             </div>
           </div>
@@ -189,65 +210,71 @@ export default function MiniDrawer() {
             <ListItemButton className="active">
               <NavLink
                 onClick={() => {
-                  setTitle("Xisobot");
+                  setTitle(language.report);
+                  setMenu('report')
                 }}
                 to="/"
                 className="navlink"
               >
                 <HomeIcon style={{ color: "#fff", marginRight: 30 }} />
-                Xisobot
+                {language.report}
               </NavLink>
             </ListItemButton>
             <ListItemButton>
               <NavLink
                 onClick={() => {
-                  setTitle("O’quvchilar");
+                  setTitle(language.students);
+                  setMenu('students')
+
                   setData("students");
                 }}
                 to="/studentes"
                 className="navlink"
               >
                 <SchoolSharpIcon style={{ color: "#fff", marginRight: 30 }} />
-                O’quvchilar
+                {language.students}
               </NavLink>
             </ListItemButton>
             <ListItemButton>
               <NavLink
                 onClick={() => {
-                  setTitle("Guruhlar");
+                  setTitle(language.groups);
+                  setMenu('groups')
                   setData("students");
                 }}
                 to="/groups1"
                 className="navlink"
               >
                 <GroupsIcon style={{ color: "#fff", marginRight: 30 }} />
-                Guruhlar
+                {language.groups}
               </NavLink>
             </ListItemButton>
             <ListItemButton>
               <NavLink
                 onClick={() => {
-                  setTitle("To’lovlar");
+                  setMenu('payments')
+                  setTitle(language.payments);
                   setData("students");
                 }}
                 to="/payments"
                 className="navlink"
               >
                 <PaymentIcon style={{ color: "#fff", marginRight: 30 }} />
-                To’lovlar
+                {language.payments}
               </NavLink>
             </ListItemButton>
             <ListItemButton>
               <NavLink
                 onClick={() => {
+                  setMenu('attendence')
                   setData("students");
-                  setTitle("Davomat");
+                  setTitle(language.attendence);
                 }}
                 to="/attendance"
                 className="navlink"
               >
                 <ContactsIcon style={{ color: "#fff", marginRight: 30 }} />
-                Davomat
+                {language.attendence}
               </NavLink>
             </ListItemButton>
           </List>

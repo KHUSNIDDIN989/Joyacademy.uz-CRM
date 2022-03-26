@@ -2,18 +2,20 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import User from "../../assets/images/user.png";
 import "./Groups1.css";
+import { useSelector } from "react-redux";
 function Groups1() {
+  const language = useSelector(state => state.language.currentLanguage)
   return (
     <div className="container">
       <div className="main my-5 pt-5">
         <div className="col-md-12 mt-3">
-          <h1 className="col__h1">Yangi guruh qo’shish</h1>
+          <h1 className="col__h1">{language.addNewGroup}</h1>
           <form>
             <div className="form-row">
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Guruh yo’nalishi
+                    {language.field}
                   </label>
                   <select id="inputState" className="form-control">
                     <option defaultValue="">Ona-tili</option>
@@ -22,7 +24,7 @@ function Groups1() {
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    Dars kunlari
+                    {language.lessonDays}
                   </label>
                   <input
                     type="text"
@@ -32,7 +34,7 @@ function Groups1() {
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    Dars vaqti
+                    {language.lessonTime}
                   </label>
                   <select id="inputState" className="form-control">
                     <option defaultValue="">Ona-tili</option>
@@ -45,7 +47,7 @@ function Groups1() {
               <div className="col d-flex justify-content-between">
                 <div className="w-50 m-2">
                   <label htmlFor="inputText" className="col__label">
-                    O’qituvchi
+                    {language.teacher}
                   </label>
                   <input
                     type="text"
@@ -55,31 +57,31 @@ function Groups1() {
                 </div>
                 <div className="w-50 m-2">
                   <label htmlFor="inputState" className="col__label">
-                    O’qituvchi tell nomeri
-                  </label>
-                  <input type="text" className="form-control" placeholder="" />
-                </div>
-                <div className="w-50 m-2">
-                  <label htmlFor="inputState" className="col__label">
-                    O’qituvchi tell nomeri
+                    {language.teacherTel}
                   </label>
                   <input
-                    type="file"
+                    type="text"
                     className="form-control"
                     placeholder="+998 xx xxx xx xx"
                   />
                 </div>
+                <div className="w-50 m-2">
+                  <label htmlFor="inputState" className="col__label">
+                    {language.teacherImg}
+                  </label>
+                  <input type="file" className="form-control" />
+                </div>
               </div>
               <div className="w-100 m-2 p-3 mt-3 card__btn">
                 <button className="btn btn-primary btn__btn">
-                  To’lov qilish
+                  {language.addNewGroup}
                 </button>
               </div>
             </div>
           </form>
         </div>
         <div className="col-md-12 d-flex justify-content-between mt-5 pt-5 mb-3">
-          <h3 className="col__h3">Davomat olinadigan guruhni tanlang</h3>
+          <h3 className="col__h3">{ language.chooseGroup}</h3>
           <div className="col__img-input">
             <SearchIcon className="col__search" />
             <input type="text" className="col__input" />
