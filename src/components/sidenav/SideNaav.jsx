@@ -34,11 +34,10 @@ import Groups from "../groups/Groups";
 import Groups1 from "../Groups1/Groups1";
 import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
-import DarkMode from "../../assets/images/icon-sun.png"
 import "./SideNav.css";
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
+import ThemeMode from "../ThemeMode/ThemeMode";
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -155,6 +154,9 @@ export default function MiniDrawer() {
     }
     
   }, [language])
+  //theme
+  const isDark = useSelector(state => state.isDark.bool);
+
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -164,7 +166,7 @@ export default function MiniDrawer() {
         position="fixed"
         open={open}
       >
-        <Toolbar>
+        <Toolbar className={isDark ? "dark__header" : "light"}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -178,19 +180,24 @@ export default function MiniDrawer() {
             <MenuIcon className={classes.title} />
           </IconButton>
           <div className=" d-flex justify-content-between w-100">
-            <Typography className="typo" variant="h4" noWrap component="p">
+            <Typography
+              className={`typo ${isDark ? "dark__header" : "light"}`}
+              variant="h4"
+              noWrap
+              component="p"
+            >
               {title}
             </Typography>
             <div className="d-flex align-items-center w-25 justify-content-evenly">
               <SelectAutoWidth />
-              <img src={DarkMode} className="bell" alt="" />
+              <ThemeMode />
               <NotificationsNoneIcon className="bell" />
             </div>
           </div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader className="drawe__header">
+        <DrawerHeader className={`drawe__header ${isDark ? "dark" : "light"}`}>
           <AccountBoxIcon className="drawe__header-contact" />
           <p className="drawe__header-p">
             CRM <br />
@@ -205,13 +212,16 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Box style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}>
+        <Box
+          className={isDark ? "dark" : "light"}
+          style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}
+        >
           <List>
             <ListItemButton className="active">
               <NavLink
                 onClick={() => {
                   setTitle(language.report);
-                  setMenu('report')
+                  setMenu("report");
                 }}
                 to="/"
                 className="navlink"
@@ -224,7 +234,7 @@ export default function MiniDrawer() {
               <NavLink
                 onClick={() => {
                   setTitle(language.students);
-                  setMenu('students')
+                  setMenu("students");
 
                   setData("students");
                 }}
@@ -239,7 +249,7 @@ export default function MiniDrawer() {
               <NavLink
                 onClick={() => {
                   setTitle(language.groups);
-                  setMenu('groups')
+                  setMenu("groups");
                   setData("students");
                 }}
                 to="/groups1"
@@ -252,7 +262,7 @@ export default function MiniDrawer() {
             <ListItemButton>
               <NavLink
                 onClick={() => {
-                  setMenu('payments')
+                  setMenu("payments");
                   setTitle(language.payments);
                   setData("students");
                 }}
@@ -266,7 +276,7 @@ export default function MiniDrawer() {
             <ListItemButton>
               <NavLink
                 onClick={() => {
-                  setMenu('attendence')
+                  setMenu("attendence");
                   setData("students");
                   setTitle(language.attendence);
                 }}
@@ -280,7 +290,7 @@ export default function MiniDrawer() {
           </List>
         </Box>
       </Drawer>
-      <div className="wrapper">
+      <div className={`wrapper ${isDark?"dark__back":"light"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/studentes" element={<Studentes />} />

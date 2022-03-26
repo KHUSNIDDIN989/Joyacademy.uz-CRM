@@ -9,10 +9,11 @@ export default function CustomizedSelects() {
       let value = e.target.value;
     dispatch(languageActions.changeLanguage(value))
   };
-  const language = useSelector(state => state.language.currentLanguage)
+  const language = useSelector(state => state.language.currentLanguage);
+  const isDark = useSelector(state=>state.isDark.bool)
   return (
     <div className="position-relative">
-      <select className="select" onChange={handechange}>
+      <select className="select" style={{color:isDark?"#FFFFFF":"#000000"}} onChange={handechange}>
         {" "}
         <option value={"uz"}>UZ</option>
         <option value={"en"}>EN</option>

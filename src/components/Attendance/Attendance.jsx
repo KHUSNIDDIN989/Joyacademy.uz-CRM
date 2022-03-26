@@ -5,22 +5,36 @@ import { useSelector } from "react-redux";
 
 function Attendance() {
   const language = useSelector(state => state.language.currentLanguage);
+  const isDark = useSelector((state) => state.isDark.bool);
   let arr = [1, 2, 3,4 ,5,6]
   return (
     <div className="container">
       <div className="main my-5 ">
         <div className="col-md-12 d-flex justify-content-between mt-5 pt-5 mb-3">
-          <h3 className="col__h3">{language.chooseGroup}</h3>
+          <h3 className={`col__h3 ${isDark ? "dark__title" : "light"}`}>
+            {language.chooseGroup}
+          </h3>
           <div className="col__img-input">
             <SearchIcon className="col__search" />
-            <input type="text" className="col__input" />
+            <input
+              type="text"
+              className={`col__input ${isDark ? "dark__btn" : "light"}`}
+            />
           </div>
         </div>
         <div className="row">
-          {arr.map((e,i) => (
+          {arr.map((e, i) => (
             <div key={i} className="col-md-4 mb-3">
-              <div className="card h-100 card__card ">
-                <div className=" bg-primary text-center  informatika">
+              <div
+                className={`card h-100 card__card ${
+                  isDark ? "dark__cards" : "light"
+                }`}
+              >
+                <div
+                  className={` bg-primary text-center  informatika ${
+                    isDark ? "dark__btn" : "light"
+                  }`}
+                >
                   <p className="text-light mt-3 ">Informatika</p>
                 </div>
                 <div className="p-3">
@@ -59,8 +73,6 @@ function Attendance() {
               </div>
             </div>
           ))}
-         
-
         </div>
       </div>
     </div>
