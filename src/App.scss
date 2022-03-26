@@ -27,16 +27,16 @@
 
 .dark{
   background-color: #161624 !important;
-  transition: .5s ease-in;
+  transition: .5s ease-out;
   color: #FFFFFF !important;
   &__title{
     color: #FFFFFF !important;
-    transition: .5s ease-in !important;
+    transition: .5s ease-out !important;
     border: none !important;
   }
   &__img{
      background-color: #515C8D !important;
-    transition: .5s;
+    transition: .5s ease-out;
   }
   &__cards{
      background-color:  rgba($color: #515C8D, $alpha: 1) !important;
@@ -44,7 +44,7 @@
   &__odd{
     background-color: #00072D !important;
     color: #FFF !important;
-    transition: .5s ease-in;
+    transition: .5s ease-out;
     border: none !important;
     &:hover{
       background-color: #00172D !important;
@@ -55,7 +55,7 @@
     background: rgba(0, 28, 175, 0.1) !important;
     color: #FFF !important;
     border: none !important;
-    transition: .5s !important;
+    transition: .5s ease-out !important;
     &:hover{
       background-color: #00172D !important;
 
@@ -63,13 +63,13 @@
   }
   &__back{
     background-color: #120d1c !important;
-    transition: .5s ease-in;
+    transition: .5s ease-out;
 
   }
   &__card{
     background-color: #222235 !important;
     color: #FFFFFF !important;
-    transition: .5s ease-in;
+    transition: .5s ease-out;
   }
   &__header{
     transition: .5s;
@@ -79,7 +79,7 @@
   &__input{
     color: rgba($color: #FFFFFF, $alpha: 1.0);
     background-color: #515C8D;
-    transition: .5s ease-in;
+    transition: .5s ease-out;
     &::placeholder{
       color: rgba($color: #C4C4C4, $alpha: 1) !important;
     }
@@ -91,7 +91,7 @@
   &__btn{
     background-color: #192152 !important;
     color: #FFF !important;
-    transition: .5s ease-in;
+    transition: .5s ease-out;
     &::placeholder{
       color: #fff !important;
     }

@@ -176,7 +176,7 @@ function Payments() {
                       }
                       scope="row"
                     >
-                      1
+                      {index+1}
                     </th>
                     <td
                       className={

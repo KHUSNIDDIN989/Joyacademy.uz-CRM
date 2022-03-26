@@ -181,7 +181,7 @@ export default function MiniDrawer() {
           </IconButton>
           <div className=" d-flex justify-content-between w-100">
             <Typography
-              className={`typo ${isDark ? "dark__header" : "light"}`}
+              className={`typo ${isDark ? "dark__title" : "light"}`}
               variant="h4"
               noWrap
               component="p"
