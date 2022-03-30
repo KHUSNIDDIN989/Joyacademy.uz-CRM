@@ -7,14 +7,9 @@ import "./Payments.css";
 function Payments() {
   const [payments, setPayments] = useState([]);
   const [search, setSearch] = useState("");
-  const [studentName, setStudentName] = useState("");
-  const [paymentDate, setPaymentDate] = useState("");
-  const [groupId, setGroupId] = useState("");
   const [posts, setPosts] = useState([]);
   const [groupActive, setGroupActive] = useState([]);
   const [teacher, setTeacher] = useState([]);
-  const [teacherId, setTeacherId] = useState("");
-  const [studentPhone, setStudentPhone] = useState('')
 
   useEffect(() => {
     fetch(`https://crm-joygroup.herokuapp.com/payments?search=${search}`)
@@ -32,23 +27,18 @@ function Payments() {
       .then((res) => res.json())
       .then((data) => setTeacher(data));
   }, []);
-console.log(posts);
-console.log(groupId);
   const PostForm = (e) => {
     e.preventDefault();
-   
-    console.log(studentName);
-    console.log(teacherId);
-    console.log(paymentDate);
-    console.log(studentPhone);
+
     fetch(`https://crm-joygroup.herokuapp.com/payments`, {
+      headers: { "Content-Type": "application/json" },
       method: "PUT",
       body: JSON.stringify({
-        student_name: studentName,
-        teacher_id: teacherId,
-        group_id: groupId,
-        payment_date: paymentDate,
-        student_phone: studentPhone,
+        student_name: e.target.student.value,
+        teacher_id: e.target.teacher.value,
+        group_id: e.target.groupid.value,
+        payment_date: e.target.date.value,
+        student_phone: e.target.studentphone.value,
       }),
     }).then((res) => res.json().then((data) => setPosts(data)));
 
@@ -57,12 +47,10 @@ console.log(groupId);
 
   const hendleSearch = (e) => {
     e.preventDefault();
-
     setSearch(e.target.search.value);
 
     e.target.search.value = "";
   };
-
 
   return (
     <div className="container">
@@ -77,8 +65,7 @@ console.log(groupId);
                     O’quvchi ismi
                   </label>
                   <input
-                    onChange={(e) => setStudentName(e.target.value)}
-                    name="parentName"
+                    name="student"
                     type="text"
                     className="form-control"
                     placeholder="Muxamadaliyev Ibroxim"
@@ -91,13 +78,11 @@ console.log(groupId);
                   <select
                     id="inputState"
                     className="form-control"
-                    name="select"
-                    onClick={(e) => setGroupId(e.target.value)}
-                    defaultValue={groupId}
+                    name="groupid"
                   >
                     {groupActive?.map((i) => {
                       return (
-                        <option key={Math.random()} value={i.group_name}>
+                        <option key={Math.random()} value={i.group_id}>
                           {i.group_name}
                         </option>
                       );
@@ -109,8 +94,7 @@ console.log(groupId);
                     O’qituvchi tell nomeri
                   </label>
                   <input
-                    onChange={(e) => setStudentPhone(e.target.value)}
-                    name="parentPhone"
+                    name="studentphone"
                     type="number"
                     className="form-control"
                     placeholder="+998 xx xxx xx xx"
@@ -127,8 +111,7 @@ console.log(groupId);
                   <select
                     id="inputState"
                     className="form-control"
-                    name="select"
-                    onChange={(e) => setTeacherId(e.target.value)}
+                    name="teacher"
                   >
                     {teacher?.map((i) => {
                       return (
@@ -143,14 +126,7 @@ console.log(groupId);
                   <label htmlFor="inputState" className="col__label">
                     To’lov qilayotgan kun
                   </label>
-                  <input
-                    onChange={(e) => {
-                      setPaymentDate(e.target.value);
-                    }}
-                    name="parentPhone"
-                    type="date"
-                    className="form-control"
-                  />
+                  <input name="date" type="date" className="form-control" />
                 </div>
                 <div className="w-50 m-2 mt-3">
                   <button className="btn w-100 btn-primary mt-4 ">

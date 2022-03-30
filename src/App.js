@@ -1,9 +1,9 @@
 import MiniDrawer from "./components/sidenav/SideNaav";
-import { ContextData} from "./context/ContextData";
+import { ContextData } from "./context/ContextData";
 function App() {
   return (
     <>
-      <ContextData>
+      <ContextData className="container">
         <MiniDrawer />
       </ContextData>
     </>

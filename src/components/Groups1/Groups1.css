@@ -19,7 +19,6 @@
   .card__card {
     width: 330px !important;
     height: 370px !important;
-    border-radius: 10px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin-top: 10px;
@@ -86,3 +85,4 @@
   a{
     text-decoration: none;
   }
+ 

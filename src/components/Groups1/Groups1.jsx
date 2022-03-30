@@ -9,7 +9,6 @@ function Groups1() {
   const [teacherPhone, setTeacherPhone] = useState("");
   const [lessonDays, setLessonDays] = useState("");
   const [lessonHours, setLessonHours] = useState("");
-  const [groupId, setGroupId] = useState("");
   const [file, setFile] = useState();
   const [posts, setPosts] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -28,7 +27,7 @@ function Groups1() {
     formData.append("teacher_phone", teacherPhone);
     formData.append("lesson_days", lessonDays);
     formData.append("lesson_hours", lessonHours);
-    formData.append("group_id", groupId);
+    formData.append("group_id", e.target.select.value);
     formData.append("file", file);
 
     fetch(`https://crm-joygroup.herokuapp.com/teachers`, {
@@ -68,10 +67,13 @@ function Groups1() {
                     id="inputState"
                     className="form-control"
                     name="select"
-                    onChange={(e) => setGroupId(e.target.value)}
                   >
                     {groups?.map((i) => {
-                      return <option key={Math.random()} value={i.group_id}>{i.group_name}</option>;
+                      return (
+                        <option key={Math.random()} value={i.group_id}>
+                          {i.group_name}
+                        </option>
+                      );
                     })}
                   </select>
                 </div>

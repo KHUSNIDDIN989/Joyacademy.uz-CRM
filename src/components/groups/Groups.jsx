@@ -15,7 +15,6 @@ function Groups() {
       .then((data) => setTeacher(data));
   }, []);
 
-  console.log(teacher[0]);
   return (
     <div className="container">
       <div className="main mt-5 pt-4">

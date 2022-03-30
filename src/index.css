@@ -76,5 +76,13 @@ code {
 .container {
   margin: 0 auto;
   padding: 0 30px;
-  width: 1187px;
+  width: 1100px;
+}
+.table > :not(:first-child) {
+  border-top: none;
+}
+.card {
+  height: 507px;
+  background: #ffffff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
 }

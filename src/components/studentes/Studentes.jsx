@@ -18,8 +18,7 @@ function Studentes() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState([]);
-
-  console.log(students);
+  const [groupActive, setGroupActive] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -39,18 +38,13 @@ function Studentes() {
     formData.append("student_phone", phoneNumber);
     formData.append("parents_name", parentName);
     formData.append("parents_phone", parentPhone);
-    formData.append("group_id", option);
+    formData.append("group_id", e.target.select.value);
     formData.append("file", file);
 
     fetch(`https://crm-joygroup.herokuapp.com/students`, {
       method: "POST",
       body: formData,
     }).then((res) => res.json().then((data) => setPosts(data)));
-
-    // setPhoneNumber(e.target.number.value);
-    // setOption(e.target.select.value);
-    // setParentName(e.target.parentName.value);
-    // setParentPhone(e.target.parentPhone.value);
 
     e.target.reset();
   };
@@ -62,7 +56,11 @@ function Studentes() {
       .then((res) => res.json())
       .then((data) => setHendleDelete(data));
   };
-
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/groups/active`)
+      .then((res) => res.json())
+      .then((data) => setGroupActive(data));
+  }, []);
   const hendleSearch = (e) => {
     e.preventDefault();
 
@@ -113,11 +111,13 @@ function Studentes() {
                     name="select"
                     onChange={(e) => setOption(e.target.value)}
                   >
-                    <option value="1">Foundation</option>
-                    <option value="2">Java</option>
-                    <option value="3">NodeJS</option>
-                    <option value="4">Flutter</option>
-                    <option value="5">JavaScript</option>
+                    {groupActive?.map((i) => {
+                      return (
+                        <option key={Math.random()} value={i.group_id}>
+                          {i.group_name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
