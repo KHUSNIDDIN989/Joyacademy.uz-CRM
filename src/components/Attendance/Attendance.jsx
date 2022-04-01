@@ -2,11 +2,23 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import User from "../../assets/images/user.png";
 import { useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import {useEffect, useState} from 'react'
 
 function Attendance() {
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
-  let arr = [1, 2, 3,4 ,5,6]
+  const [teacher, setTeacher] = useState([]);
+  const [search, setSearch] = useState('')
+  let arr = [1, 2, 3, 4, 5, 6];
+   useEffect(() => {
+     fetch(`https://crm-joygroup.herokuapp.com/teachers?search=${search}`)
+       .then((res) => res.json())
+       .then((data) => {
+         setTeacher(data);
+         console.log(data);
+       });
+   }, [search]);
   return (
     <div className="container">
       <div className="main my-5 ">
@@ -19,58 +31,70 @@ function Attendance() {
             <input
               type="text"
               className={`col__input ${isDark ? "dark__btn" : "light"}`}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
             />
           </div>
         </div>
         <div className="row">
-          {arr.map((e, i) => (
+          {teacher.map((e, i) => (
             <div key={i} className="col-md-4 mb-3">
-              <div
-                className={`card h-100 card__card ${
-                  isDark ? "dark__cards" : "light"
-                }`}
-              >
+              <NavLink to={`/attendance1/${e.teacher_id}`}>
                 <div
-                  className={` bg-primary text-center  informatika ${
-                    isDark ? "dark__btn" : "light"
+                  className={`card h-100 card__card ${
+                    isDark ? "dark__cards" : "light"
                   }`}
                 >
-                  <p className="text-light mt-3 ">Informatika</p>
-                </div>
-                <div className="p-3">
-                  <div className="d-flex">
-                    <img src={User} className="w-25 h-25 mt-2" alt="" />
-                    <div className="">
-                      <p className="card__p ">
-                        {language.teacher}:
-                        <span className="card__span padding">
-                          Muxamadaliyev Ibroxim
-                        </span>
-                      </p>
-                      <p className="card__p">
-                        {language.tel}{" "}
-                        <span className="card__span ">+998900113861</span>
-                      </p>
+                  <div
+                    className={` bg-primary text-center  informatika ${
+                      isDark ? "dark__btn" : "light"
+                    }`}
+                  >
+                    <p className="text-light mt-3 ">{e.group_name}</p>
+                  </div>
+                  <div className="p-3">
+                    <div className="d-flex">
+                      <img
+                        src={User}
+                        className="w-25 h-25 mt-2"
+                        style={{ borderRadius: 50 }}
+                        alt={"user"}
+                      />
+                      <div className="">
+                        <p className="card__p ">
+                          O’qituvchi:
+                          <span className="card__span padding">
+                            {e.teacher_name}
+                          </span>
+                        </p>
+                        <p className="card__p">
+                          Tell raqam:{" "}
+                          <span className="card__span ">
+                            +{e.teacher_phone}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p className="card__p">Dars kunlari:</p>
+                      <p className="card__span">{e.lesson_days}</p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p className="card__p">Dars vaqti:</p>
+                      <p className="card__span">{e.lesson_hours}</p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p className="card__p">O’quvchilar soni</p>
+                      <p className="card__span">{e.studentAll.length}</p>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <p className="card__p">To’lov qilganlar</p>
+                      <p className="card__span">{e.isPaid.length}</p>
                     </div>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="card__p">{language.lessonDays}:</p>
-                    <p className="card__span">DU-CHOR-JUMA</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="card__p">{language.lessonTime}:</p>
-                    <p className="card__span">14:00-16:00</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="card__p">{language.numberstudents}</p>
-                    <p className="card__span">25</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="card__p">{language.thosePaid}</p>
-                    <p className="card__span">10</p>
-                  </div>
                 </div>
-              </div>
+              </NavLink>
             </div>
           ))}
         </div>

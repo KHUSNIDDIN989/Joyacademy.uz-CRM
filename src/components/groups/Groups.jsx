@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import User from "../../assets/images/user.png";
 import { lang } from "../store/Slices/data/languaages";
 import "./Groups.css";
 function Groups() {
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
+  const params = useParams();
+  console.log(params)
   return (
     <div className="container">
       <div className="main mt-5 pt-4">

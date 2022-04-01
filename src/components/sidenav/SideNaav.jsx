@@ -295,11 +295,11 @@ export default function MiniDrawer() {
           <Route path="/" element={<Home />} />
           <Route path="/studentes" element={<Studentes />} />
           <Route path="/studentes" element={<Studentes />} />
-          <Route path="/groups" element={<Groups />} />
-          <Route path="/groups1" element={<Groups1 />} />
+          <Route path="/groups/:id" element={<Groups />} />
+          <Route path="/groups1" element={<Groups1/>} />
           <Route path="/payments" element={<Payments />} />
-          <Route path="/Attendance" element={<Attendance />} />
-          <Route path="/Attendance1" element={<Attendance1 />} />
+          <Route path="/attendance/" element={<Attendance />} />
+          <Route path="/attendance1/:id" element={<Attendance1 />} />
         </Routes>
       </div>
     </Box>

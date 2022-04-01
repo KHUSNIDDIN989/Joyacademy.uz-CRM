@@ -2,13 +2,82 @@ import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { useEffect, useState, useRef } from "react";
 
 import "./Payments.css";
 import { useSelector } from "react-redux";
 function Payments() {
   const language = useSelector((state) => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
-  const arr=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const [payment, setPayment] = useState([]);
+  const [group, setGroup] = useState([]);
+  const [teacher, setTeacher] = useState([]);
+  const [student, setStudent] = useState([]);
+  const [search, setSearch] = useState('');
+  const [toggle, setToggle] = useState(false);
+  const tel = useRef();
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+      useEffect(() => {
+        fetch(`https://crm-joygroup.herokuapp.com/payments?search=${search}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setPayment(data);
+            console.log(data);
+          });
+      }, [search, toggle]);
+         useEffect(() => {
+           fetch(`https://crm-joygroup.herokuapp.com/groups/active`)
+             .then((res) => res.json())
+             .then((data) => setGroup(data));
+         }, []);
+         useEffect(() => {
+           fetch(`https://crm-joygroup.herokuapp.com/teachers`)
+             .then((res) => res.json())
+             .then((data) => setTeacher(data));
+         }, []);
+   useEffect(() => {
+     fetch(`https://crm-joygroup.herokuapp.com/students`)
+       .then((res) => res.json())
+       .then((data) => {
+         setStudent(data);
+         console.log(data);
+       });
+   }, []);
+  
+  const submitPayment = e => {
+    e.preventDefault();
+    const { studentName, tel, date, teacherID, groupID } = e.target.elements;
+    const newPayment = {
+      student_name: studentName.value, group_id: groupID.value, teacher_id: teacherID.value, payment_date: date.value, student_phone: tel.value
+    };
+     fetch(`https://crm-joygroup.herokuapp.com/payments`, {
+       headers: { "Content-Type": "application/json" },
+       method: "PUT",
+       body: JSON.stringify(newPayment),
+     }).then((res) =>res.json())
+       .then(data => {
+         console.log(data);
+         setToggle(!toggle)
+       });
+
+     e.target.reset();
+  }
+  const selectStudent = (e) => {
+    console.log(e.target.value);
+    const found = student.find(elem => elem.student_name == e.target.value);
+    if (found) {
+      
+      setTeacher([{ teacher_id: found.teacher_id, teacher_name: found.teacher_name }])
+      setGroup([
+        { group_id: found.group_id, group_name: found.group_name },
+      ]);
+      tel.current.value = found.student_phone
+    }
+     
+  }
+  
+
   return (
     <div className="container">
       <div className="main mt-5 pt-5">
@@ -16,7 +85,7 @@ function Payments() {
           <h1 className={`col__h1 ${isDark ? "dark__title" : "light"}`}>
             {language.paymentTitle}
           </h1>
-          <form>
+          <form onSubmit={submitPayment}>
             <div className="form-row">
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
@@ -28,11 +97,21 @@ function Payments() {
                   </label>
                   <input
                     type="text"
+                    list="data"
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}
-                    placeholder="Muxamadaliyev Ibroxim"
+                    placeholder="name"
+                    name="studentName"
+                    onChange={selectStudent}
                   />
+                  <datalist id="data">
+                    {student.map((e, i) => (
+                      <option key={i} value={e.student_name}>
+                        {e.student_name}
+                      </option>
+                    ))}
+                  </datalist>
                 </div>
                 <div className=" w-50 m-2">
                   <label
@@ -46,9 +125,13 @@ function Payments() {
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}
+                    name="groupID"
                   >
-                    <option defaultValue="">Ona-tili</option>
-                    <option>...</option>
+                    {group.map((e, i) => (
+                      <option key={i} value={e.group_id}>
+                        {e.group_name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className=" w-50 m-2">
@@ -64,6 +147,8 @@ function Payments() {
                       isDark ? "dark__input" : "light"
                     }`}
                     placeholder="+998 xx xxx xx xx"
+                    ref={tel}
+                    name="tel"
                   />
                 </div>
               </div>
@@ -72,18 +157,24 @@ function Payments() {
               <div className="col d-flex justify-content-between">
                 <div className=" w-50 m-2">
                   <label
-                    htmlFor="inputText"
+                    htmlFor="inputTeacher"
                     className={`col__label ${isDark ? "dark__title" : "light"}`}
                   >
                     {language.teacher}
                   </label>
-                  <input
-                    type="text"
+                  <select
+                    id="inputTeacher"
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}
-                    placeholder=" Olimjonova Nargiza"
-                  />
+                    name="teacherID"
+                  >
+                    {teacher.map((e, i) => (
+                      <option key={i} value={e.teacher_id}>
+                        {e.teacher_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className=" w-50 m-2">
                   <label
@@ -97,16 +188,10 @@ function Payments() {
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}
-                    placeholder="+998 xx xxx xx xx"
+                    name="date"
                   />
                 </div>
-                <div className="d-flex flex-column w-50 m-2">
-                  <label
-                    htmlFor="inputText"
-                    className={`col__label ${isDark ? "dark__title" : "light"}`}
-                  >
-                    {language.tel}
-                  </label>
+                <div className="d-flex flex-column w-50 m-2 justify-content-end">
                   <button
                     className={`btn btn-primary ${
                       isDark ? "dark__btn" : "light"
@@ -128,6 +213,9 @@ function Payments() {
             <input
               type="text"
               className={`col__input ${isDark ? "dark__btn" : "light"}`}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -162,7 +250,7 @@ function Payments() {
                 </tr>
               </thead>
               <tbody>
-                {arr.map((e, index) => (
+                {payment.map((e, index) => (
                   <tr key={index} className={`${isDark ? "dark" : "light"}`}>
                     <th
                       className={
@@ -176,7 +264,7 @@ function Payments() {
                       }
                       scope="row"
                     >
-                      {index+1}
+                      {index + 1}
                     </th>
                     <td
                       className={
@@ -189,7 +277,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                      Muxamadaliyev Ibroxim
+                     {e.student_name}
                     </td>
                     <td
                       className={
@@ -202,7 +290,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                      +998900113861
+                      {e.student_phone}
                     </td>
                     <td
                       className={
@@ -215,7 +303,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                      Matematika
+                      {e.group_name}
                     </td>
                     <td
                       className={
@@ -228,7 +316,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                      O’qituvchi (F.I.SH)
+                      {e.teacher_name}
                     </td>
                     <td
                       className={
@@ -241,7 +329,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                      06.02.2022
+                      {e.payment_date}
                     </td>
                     <td
                       className={
@@ -254,7 +342,6 @@ function Payments() {
                           : "light"
                       }
                     >
-                      <input type="checkbox" />
                     </td>
                   </tr>
                 ))}

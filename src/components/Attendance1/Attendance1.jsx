@@ -1,7 +1,10 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import User from "../../assets/images/user.png";
 import "./Attendance1.css";
 function Attendance1() {
+  const param = useParams();
+  console.log(param);
   return (
     <div className="container">
       <div className="main mt-5 pt-4">
