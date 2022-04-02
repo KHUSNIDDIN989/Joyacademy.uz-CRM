@@ -76,6 +76,7 @@
 .wrapper {
   background: #f0f2fa;
   width: 100vw;
+  min-height: 100vh;
 }
 .active {
   border-right: 2px solid;
@@ -83,4 +84,25 @@
   width: 100%;
   color: #fff;
   padding: 0 5px;
+}
+.appeals_num{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #E13468 !important;
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
+.appeals__bell{
+  position: relative;
+}
+.appeals_top{
+  right: -5px;
+  top: -5px;
 }

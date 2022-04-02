@@ -1,6 +1,6 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import User from "../../assets/images/user.png";
+import User from "../../assets/images/user.jpg";
 import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import {useEffect, useState} from 'react'

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, Link } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
@@ -23,6 +23,7 @@ import SchoolSharpIcon from "@mui/icons-material/SchoolSharp";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ContactsIcon from "@mui/icons-material/Contacts";
+import { ReactComponent as AppealIcon } from "../../assets/images/appeal.svg";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
@@ -34,6 +35,7 @@ import Groups from "../groups/Groups";
 import Groups1 from "../Groups1/Groups1";
 import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
+import Application from "../Applications/Application";
 import "./SideNav.css";
 import { useSelector } from 'react-redux'
 import ThemeMode from "../ThemeMode/ThemeMode";
@@ -156,7 +158,8 @@ export default function MiniDrawer() {
   }, [language])
   //theme
   const isDark = useSelector(state => state.isDark.bool);
-
+  // appeals nums
+  const apppealsNum = useSelector(state => state.appeal.count);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -191,7 +194,10 @@ export default function MiniDrawer() {
             <div className="d-flex align-items-center w-25 justify-content-evenly">
               <SelectAutoWidth />
               <ThemeMode />
-              <NotificationsNoneIcon className="bell" />
+              <Link to='/application' className="appeals__bell">
+                <NotificationsNoneIcon className="bell" />
+                {apppealsNum?<span className="appeals_num appeals_top">{ apppealsNum}</span>:''}
+              </Link>
             </div>
           </div>
         </Toolbar>
@@ -287,19 +293,35 @@ export default function MiniDrawer() {
                 {language.attendence}
               </NavLink>
             </ListItemButton>
+            <ListItemButton>
+              <NavLink
+                onClick={() => {
+                  setMenu("attendence");
+                  setData("students");
+                  setTitle(language.appeals);
+                }}
+                to="/application"
+                className="navlink"
+              >
+                <AppealIcon style={{ color: "#fff", marginRight: 30 }} />
+                {language.appeals}
+               {apppealsNum? <span className="appeals_num">{apppealsNum}</span>:''}
+              </NavLink>
+            </ListItemButton>
           </List>
         </Box>
       </Drawer>
-      <div className={`wrapper ${isDark?"dark__back":"light"}`}>
+      <div className={`wrapper ${isDark ? "dark__back" : "light"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/studentes" element={<Studentes />} />
           <Route path="/studentes" element={<Studentes />} />
           <Route path="/groups/:id" element={<Groups />} />
-          <Route path="/groups1" element={<Groups1/>} />
+          <Route path="/groups1" element={<Groups1 />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/attendance/" element={<Attendance />} />
           <Route path="/attendance1/:id" element={<Attendance1 />} />
+          <Route path="/application" element={<Application />} />
         </Routes>
       </div>
     </Box>

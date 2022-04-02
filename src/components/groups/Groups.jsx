@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import User from "../../assets/images/user.png";
@@ -7,17 +7,40 @@ import "./Groups.css";
 function Groups() {
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
-  const params = useParams();
-  console.log(params)
+  const {id} = useParams();
+  const [group, setGroup] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [paid, setPaid] = useState([]);
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/teachers`)
+      .then((res) => res.json())
+      .then((data) => {
+        let found = data.find(e => e.teacher_id == id)
+        setGroup(found)
+        setStudents(found.studentAll)
+        setPaid(found.isPaid);
+      });
+  }, []);
+  console.log(group)
   return (
     <div className="container">
       <div className="main mt-5 pt-4">
-        <h2 className={`mt-3 main__h2 ${isDark?"dark__title":"light"}`}>{language.groupList}</h2>
+        <h2 className={`mt-3 main__h2 ${isDark ? "dark__title" : "light"}`}>
+          {language.groupList}
+        </h2>
         <div className="row mt-3">
           <div className="col-md-4">
-            <div className="card h-100 card__card ">
-              <div className=" bg-primary text-center  informatika">
-                <p className="text-light mt-3 ">Informatika</p>
+            <div
+              className={`card h-100 card__card ${
+                isDark ? "dark__cards" : "light"
+              }`}
+            >
+              <div
+                className={` bg-primary text-center  informatika ${
+                  isDark ? "dark__btn" : "light"
+                }`}
+              >
+                <p className="text-light mt-3 ">{group.group_name}</p>
               </div>
               <div className="p-3">
                 <div className="d-flex">
@@ -26,41 +49,49 @@ function Groups() {
                     <p className="card__p ">
                       {language.teacher}:
                       <span className="card__span padding">
-                        Muxamadaliyev Ibroxim
+                        {group.teacher_name}
                       </span>
                     </p>
                     <p className="card__p">
                       {language.tel}:{" "}
-                      <span className="card__span ">+998900113861</span>
+                      <span className="card__span ">
+                        +{group.teacher_phone}
+                      </span>
                     </p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="card__p">{language.lessonDays}:</p>
-                  <p className="card__span">DU-CHOR-JUMA</p>
+                  <p className="card__span">{group.lesson_days}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="card__p">{language.lessonTime}:</p>
-                  <p className="card__span">14:00-16:00</p>
+                  <p className="card__span">{group.lesson_hours}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="card__p">{language.numberstudents}</p>
-                  <p className="card__span">25ta</p>
+                  <p className="card__span">{students.length}</p>
                 </div>
                 <div className="d-flex justify-content-between">
                   <p className="card__p">{language.thosePaid}</p>
-                  <p className="card__span">10ta</p>
+                  <p className="card__span">{paid.length}</p>
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="card__h3">Shu oy bo’yicha to’lov qilmaganlar </h3>
+              <h3 className={`card__h3 ${isDark ? "dark__title" : "light"}`}>Shu oy bo’yicha to’lov qilmaganlar </h3>
               <div>
                 <ol className="mt-4">
-                  <li>Muxamadaliyev Ibroxim</li>
-                  <li>Muxamadaliyev Ibroxim</li>
-                  <li>Muxamadaliyev Ibroxim</li>
-                  <li>Muxamadaliyev Ibroxim</li>
+                  {students.filter(e=>e.is_paid==false).map((e, i) => (
+                    <li
+                      className={`not__attended ${
+                        isDark ? "dark__grey" : "light"
+                      }`}
+                      key={i}
+                    >
+                      {e.student_name}
+                    </li>
+                  ))}
                 </ol>
               </div>
             </div>
@@ -73,7 +104,11 @@ function Groups() {
                 boxShadow: " 0px 10px 25px rgba(0, 0, 0, 0.25)",
               }}
             >
-              <table className="table table-striped table-hover">
+              <table
+                className={`table table-striped table-hover h-25 p-5 ${
+                  isDark ? "dark" : "light"
+                }`}
+              >
                 <thead>
                   <tr
                     style={{
@@ -81,6 +116,7 @@ function Groups() {
                       color: "#fff",
                       border: "none",
                     }}
+                    className={`${isDark ? "dark" : "light"}`}
                   >
                     <th scope="col">№</th>
                     <th scope="col">O’quvchi ismi</th>

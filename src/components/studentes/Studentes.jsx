@@ -113,7 +113,7 @@ console.log(students)
                   <input
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     name="number"
-                    type="number"
+                    type="tel"
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}
@@ -173,7 +173,7 @@ console.log(students)
                   <input
                     onChange={(e) => setParentPhone(e.target.value)}
                     name="parentPhone"
-                    type="number"
+                    type="tel"
                     className={`form-control ${
                       isDark ? "dark__input" : "light"
                     }`}

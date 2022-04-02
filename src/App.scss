@@ -38,7 +38,7 @@
     transition: .5s ease-out;
   }
   &__cards{
-     background-color:  rgba($color: #515C8D, $alpha: 1) !important;
+     background-color:  rgba($color: #815C8D, $alpha: 1) !important;
   }
   &__odd{
     background-color: #00072D !important;
@@ -99,7 +99,13 @@
 
     }
   }
+  &__grey{
+    color: rgba($color: #fff, $alpha: .7)
+  }
 }
 .light{
  transition: .5s ease-out !important;
+}
+a{
+  text-decoration: none;
 }
