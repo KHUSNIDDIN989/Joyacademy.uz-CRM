@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack";
 import './Application.scss'
 import { ReactComponent as Trash} from '../../assets/images/trash.svg';
 import { appealActions } from "../store/Slices/AppealSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Application() {
     
     const language = useSelector(state => state.language.currentLanguage);
@@ -26,8 +28,35 @@ function Application() {
         fetch(`https://crm-joygroup.herokuapp.com/appeals?appeal_id=${id}`, {
             method:"DELETE"
         }).then(res => res.json())
-            .then(data => console.log(data))
+          .then(data => {
+            console.log(data);
+        data.status == 200
+          ? notify("success", "O'chirildi!")
+          : notify("Error", "Qayta uririnib ko'ring! ");
+
+          })
             .finally(()=>setDeleted(!deleted));
+    }
+    function notify(type, text) {
+      return type == "success"
+        ? toast.success(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
+        : toast.error(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
     }
     return (
       <div className="container">
@@ -116,6 +145,17 @@ function Application() {
                             style={{ cursor: "pointer" }}
                           >
                             <Trash />
+                            <ToastContainer
+                              position="bottom-center"
+                              autoClose={5000}
+                              hideProgressBar={false}
+                              newestOnTop={false}
+                              closeOnClick
+                              rtl={false}
+                              pauseOnFocusLoss
+                              draggable
+                              pauseOnHover
+                            />
                           </td>
                         </tr>
                       );

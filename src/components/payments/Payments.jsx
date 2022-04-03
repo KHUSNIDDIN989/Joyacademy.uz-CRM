@@ -6,6 +6,8 @@ import { useEffect, useState, useRef } from "react";
 
 import "./Payments.css";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Payments() {
   const language = useSelector((state) => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
@@ -59,6 +61,11 @@ function Payments() {
        .then(data => {
          console.log(data);
          setToggle(!toggle)
+         if (data.status == 200 || data.status == 201) {
+           notify("success", "Qabul qilindi!");
+         } else {
+           notify("error", "Xatolik,  qayta urinib ko'ring!");
+         }
        });
 
      e.target.reset();
@@ -75,6 +82,27 @@ function Payments() {
       tel.current.value = found.student_phone
     }
      
+  }
+  function notify(type, text) {
+    return type == "success"
+      ? toast.success(text, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      : toast.error(text, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
   }
   
 
@@ -191,14 +219,27 @@ function Payments() {
                     name="date"
                   />
                 </div>
+              
                 <div className="d-flex flex-column w-50 m-2 justify-content-end">
                   <button
-                    className={`btn btn-primary ${
+                    className={`btn btn-primary  ${
                       isDark ? "dark__btn" : "light"
                     }`}
+                    // onClick={notify}
                   >
-                    {language.paymentTitle}
+                    {language.addNewStudent}
                   </button>
+                  <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
                 </div>
               </div>
             </div>
@@ -277,7 +318,7 @@ function Payments() {
                           : "light"
                       }
                     >
-                     {e.student_name}
+                      {e.student_name}
                     </td>
                     <td
                       className={
@@ -341,8 +382,7 @@ function Payments() {
                           ? "dark__odd"
                           : "light"
                       }
-                    >
-                    </td>
+                    ></td>
                   </tr>
                 ))}
               </tbody>

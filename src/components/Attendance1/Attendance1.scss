@@ -36,6 +36,11 @@
   z-index: 10;
 }
 .not__attended{
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 10px;
+}
+
+.card__span{
+  text-decoration: none;
+  cursor: pointer;
 }

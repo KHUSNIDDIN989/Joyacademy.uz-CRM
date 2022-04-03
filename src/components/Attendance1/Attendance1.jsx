@@ -6,6 +6,8 @@ import "./Attendance1.scss";
 import { ReactComponent as Checked } from '../../assets/images/checked.svg';
 import { ReactComponent as Unchecked } from "../../assets/images/unchecked.svg";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Attendance1() {
   const { id } = useParams();
@@ -55,14 +57,42 @@ function Attendance1() {
       body:JSON.stringify(attendance)
     })
       .then(res => res.json())
-      .then(data=>console.log(data));
+      .then(data => {
+        console.log(data);
+         if (data.status == 200 || data.status == 201) {
+           notify("success", "Qabul qilindi!");
+         } else {
+           notify("error", "Xatolik,  qayta urinib ko'ring!");
+         }
+      });
+  }
+   function notify(type, text) {
+     return type == "success"
+       ? toast.success(text, {
+           position: "top-center",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         })
+       : toast.error(text, {
+           position: "top-center",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
    }
   return (
     <div className="container">
       <div className="main mt-5 pt-4">
         <h3
           className={`col__h3 ${isDark ? "dark__title" : "light"}`}
-        >{`${teachers.group_name} guruhi ro’yhati`}</h3>
+        >{`${teachers.group_name} ${language.group}`}</h3>
         <div className="row mt-3">
           <div className="col-md-4">
             <div
@@ -87,33 +117,33 @@ function Attendance1() {
                   />
                   <div className="">
                     <p className="card__p ">
-                      O’qituvchi:
+                      {language.teacher}
                       <span className="card__span padding">
                         {teachers.teacher_name}
                       </span>
                     </p>
                     <p className="card__p">
-                      Tell raqam:{" "}
-                      <span className="card__span ">
+                      {language.teacherTel}
+                      <a fref={teachers.teacher_phone} className="card__span ">
                         +{teachers.teacher_phone}
-                      </span>
+                      </a>
                     </p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p className="card__p">Dars kunlari:</p>
+                  <p className="card__p">{language.lessonDays}:</p>
                   <p className="card__span">{teachers.lesson_days}</p>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p className="card__p">Dars vaqti:</p>
+                  <p className="card__p">{language.lessonTime}:</p>
                   <p className="card__span">{teachers.lesson_hours}</p>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p className="card__p">O’quvchilar soni</p>
+                  <p className="card__p">{language.allstudents}</p>
                   <p className="card__span">{students.length}</p>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p className="card__p">To’lov qilganlar</p>
+                  <p className="card__p">{language.thosePaid}</p>
                   <p className="card__span">
                     {students.filter((e) => e.is_paid == true).length}
                   </p>
@@ -128,7 +158,7 @@ function Attendance1() {
                   07.03.2022{" "}
                 </h3>
                 <p className={`card__h3-p ${isDark ? "dark__title" : "light"}`}>
-                  Darsga kelmaganlar{" "}
+                  {language.thoseAbsents}{" "}
                 </p>
               </div>
               <div>
@@ -151,7 +181,6 @@ function Attendance1() {
           </div>
           <div className="col-md-8">
             <div
-           
               className={`card card__table mt-2 ${
                 isDark ? "dark__card" : "light"
               }`}
@@ -176,9 +205,9 @@ function Attendance1() {
                     className={`${isDark ? "dark" : "light"}`}
                   >
                     <th scope="col">№</th>
-                    <th scope="col">O’quvchi ismi</th>
+                    <th scope="col">{language.studentName}</th>
                     <th scope="col">
-                      <label>Davomat</label>
+                      <label>{language.attendence}</label>
                     </th>
                   </tr>
                 </thead>
@@ -220,10 +249,27 @@ function Attendance1() {
                 </tbody>
               </table>
             </div>
-            <div className="card__table-btn ">
-              <button className="btn btn-primary m-3 " onClick={sendAttendance}>
-                Saqlash
+           
+            <div className="w-100 m-2 p-3 mt-3 card__btn">
+              <button
+                className={`btn btn-primary btn__btn ${
+                  isDark ? "dark__btn" : "light"
+                }`}
+                onClick={sendAttendance}
+              >
+                {language.save}
               </button>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </div>
           </div>
         </div>

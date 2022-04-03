@@ -37,7 +37,8 @@ import Attendance from "../Attendance/Attendance";
 import Attendance1 from "../Attendance1/Attendance1";
 import Application from "../Applications/Application";
 import "./SideNav.css";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { appealActions } from "../store/Slices/AppealSlice";
 import ThemeMode from "../ThemeMode/ThemeMode";
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
@@ -160,6 +161,15 @@ export default function MiniDrawer() {
   const isDark = useSelector(state => state.isDark.bool);
   // appeals nums
   const apppealsNum = useSelector(state => state.appeal.count);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/appeals`)
+      .then((res) => res.json())
+      .then((data) => {
+  //       console.log(data);
+        dispatch(appealActions.updateCount({ count: data.length }));
+      });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>

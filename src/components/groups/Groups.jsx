@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import User from "../../assets/images/user.png";
+import User from "../../assets/images/user.jpg";
 import { lang } from "../store/Slices/data/languaages";
 import "./Groups.css";
+import { ReactComponent as Checked } from "../../assets/images/checked.svg";
+import { ReactComponent as Unchecked } from "../../assets/images/unchecked.svg";
 function Groups() {
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
@@ -26,7 +28,7 @@ function Groups() {
     <div className="container">
       <div className="main mt-5 pt-4">
         <h2 className={`mt-3 main__h2 ${isDark ? "dark__title" : "light"}`}>
-          {language.groupList}
+          { group.group_name} {language.group}
         </h2>
         <div className="row mt-3">
           <div className="col-md-4">
@@ -44,7 +46,12 @@ function Groups() {
               </div>
               <div className="p-3">
                 <div className="d-flex">
-                  <img src={User} className="w-25 h-25 mt-2" alt="" />
+                  <img
+                    style={{ borderRadius: 50 }}
+                    src={User}
+                    className="w-25 h-25 mt-2"
+                    alt=""
+                  />
                   <div className="">
                     <p className="card__p ">
                       {language.teacher}:
@@ -79,26 +86,32 @@ function Groups() {
               </div>
             </div>
             <div>
-              <h3 className={`card__h3 ${isDark ? "dark__title" : "light"}`}>Shu oy bo’yicha to’lov qilmaganlar </h3>
+              <h3 className={`card__h3 ${isDark ? "dark__title" : "light"}`}>
+                {language.paymentThisMonth}
+              </h3>
               <div>
                 <ol className="mt-4">
-                  {students.filter(e=>e.is_paid==false).map((e, i) => (
-                    <li
-                      className={`not__attended ${
-                        isDark ? "dark__grey" : "light"
-                      }`}
-                      key={i}
-                    >
-                      {e.student_name}
-                    </li>
-                  ))}
+                  {students
+                    .filter((e) => e.is_paid == false)
+                    .map((e, i) => (
+                      <li
+                        className={`not__attended ${
+                          isDark ? "dark__grey" : "light"
+                        }`}
+                        key={i}
+                      >
+                        {e.student_name}
+                      </li>
+                    ))}
                 </ol>
               </div>
             </div>
           </div>
           <div className="col-md-8">
             <div
-              className="card mt-2 card__table"
+              className={`card card__table mt-2 ${
+                isDark ? "dark__card" : "light"
+              }`}
               style={{
                 background: "#FFFFFF",
                 boxShadow: " 0px 10px 25px rgba(0, 0, 0, 0.25)",
@@ -119,81 +132,42 @@ function Groups() {
                     className={`${isDark ? "dark" : "light"}`}
                   >
                     <th scope="col">№</th>
-                    <th scope="col">O’quvchi ismi</th>
-                    <th scope="col">To’lov</th>
+                    <th scope="col">{language.studentName}</th>
+                    <th scope="col">{language.payments}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">10</th>
-                    <td colSpan={1}>Muxamadaliyev Ibroxim</td>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                  </tr>
+                  {students.map((e, i) => (
+                    <tr
+                      key={i}
+                      className={
+                        i % 2
+                          ? isDark
+                            ? "dark__even"
+                            : "light"
+                          : isDark
+                          ? "dark__odd"
+                          : "light"
+                      }
+                    >
+                      <th
+                        scope="row"
+                        className={isDark ? "dark__title" : "light"}
+                      >
+                        {i + 1}
+                      </th>
+                      <td className={isDark ? "dark__title" : "light"}>
+                        {e.student_name}
+                      </td>
+                      <td className="attendance__icon">
+                        {e.is_paid ? (
+                          <Checked />
+                        ) : (
+                          <Unchecked />
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import './Attendance.scss'
 import SearchIcon from "@mui/icons-material/Search";
 import User from "../../assets/images/user.jpg";
 import { useSelector } from "react-redux";
@@ -63,13 +64,13 @@ function Attendance() {
                       />
                       <div className="">
                         <p className="card__p ">
-                          O’qituvchi:
+                          {language.teacher}:
                           <span className="card__span padding">
                             {e.teacher_name}
                           </span>
                         </p>
                         <p className="card__p">
-                          Tell raqam:{" "}
+                          {language.teacherTel}{" "}
                           <span className="card__span ">
                             +{e.teacher_phone}
                           </span>
@@ -77,19 +78,19 @@ function Attendance() {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">Dars kunlari:</p>
+                      <p className="card__p">{language.lessonDays}:</p>
                       <p className="card__span">{e.lesson_days}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">Dars vaqti:</p>
+                      <p className="card__p">{language.lessonTime}:</p>
                       <p className="card__span">{e.lesson_hours}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">O’quvchilar soni</p>
+                      <p className="card__p">{language.numberstudents}</p>
                       <p className="card__span">{e.studentAll.length}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">To’lov qilganlar</p>
+                      <p className="card__p">{language.thosePaid}</p>
                       <p className="card__span">{e.isPaid.length}</p>
                     </div>
                   </div>

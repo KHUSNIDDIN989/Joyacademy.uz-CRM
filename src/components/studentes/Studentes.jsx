@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import Delete from "../../assets/images/delete.png";
 import "./Studentes.css";
 import { useSelector } from "react-redux";
-import { lang } from "../store/Slices/data/languaages";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Studentes() {
   const [students, setStudents] = useState([]);
   const [studentName, setStudentName] = useState("");
@@ -33,9 +33,8 @@ console.log(students)
 
   console.log(hendleDelete);
 
-  const PostForm = (e) => {
+  const PostForm = async(e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("student_name", studentName);
     formData.append("student_phone", phoneNumber);
@@ -44,10 +43,19 @@ console.log(students)
     formData.append("group_id", option);
     formData.append("file", file);
 
-    fetch(`https://crm-joygroup.herokuapp.com/students`, {
+    const res = await fetch(`https://crm-joygroup.herokuapp.com/students`, {
       method: "POST",
       body: formData,
-    }).then((res) => res.json().then((data) => setPosts(data)));
+    });
+    const message = await res.json();
+    console.log(message);
+    if (message.status == 200 || message.status ==201) {
+      notify("success", "Qabul qilindi!");
+    } else {
+      notify("error", "Xatolik,  qayta urinib ko'ring!");
+    }
+      
+    
 
     // setPhoneNumber(e.target.number.value);
     // setOption(e.target.select.value);
@@ -63,7 +71,10 @@ console.log(students)
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((data) => setHendleDelete(data));
+      .then((data) => {
+        setHendleDelete(data);
+        data.status==200?notify('success', "O'chirildi!"):notify("Error", "Qayta uririnib ko'ring! ")
+      });
   };
 
   const hendleSearch = (e) => {
@@ -76,6 +87,27 @@ console.log(students)
   //language 
   const language = useSelector((state) => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
+  //Toastify
+  function notify(type, text) {
+   return type == "success"
+        ? toast.success(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
+        : toast.error(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });}
   return (
     <div className="container">
       <div className="main my-5 pt-5">
@@ -203,9 +235,21 @@ console.log(students)
                   className={`btn btn-primary btn__btn ${
                     isDark ? "dark__btn" : "light"
                   }`}
+                  // onClick={notify}
                 >
                   {language.addNewStudent}
                 </button>
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                />
               </div>
             </div>
           </form>

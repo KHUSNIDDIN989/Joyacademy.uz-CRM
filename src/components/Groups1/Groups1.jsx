@@ -5,6 +5,8 @@ import "./Groups1.css";
 import { useSelector } from "react-redux";
 import {useEffect} from 'react'
 import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Groups1() {
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
@@ -29,7 +31,7 @@ function Groups1() {
           console.log(data)
         });
     }, []);
-  const sendGroup = e => {
+  const sendGroup = async (e) => {
     e.preventDefault();
     console.log('sent')
     const { groupID, lessonDays, lessonTime, teacherName, teacherTel, teacherImg } = e.target.elements;
@@ -49,17 +51,43 @@ function Groups1() {
     form.append("group_id", groupID.value);
     form.append("file", teacherImg.files[0]);
     console.log(form, newGroup);
-      fetch(`https://crm-joygroup.herokuapp.com/teachers`, {
-        method: "POST",
       
-        body: form,
-      })
-        .then((res) => res.json())
-        .then((message) => {
-          console.log(message)
-          setToggle(!toggle);
-        });
-    
+      
+     
+    const res = await fetch(`https://crm-joygroup.herokuapp.com/teachers`, {
+      method: "POST",
+      
+      body: form,
+    });
+    const message =await res.json();
+    if (message.status == 200 || message.status == 201) {
+      notify("success", "Qabul qilindi!");
+    } else {
+      notify("error", "Xatolik,  qayta urinib ko'ring!");
+    }
+      
+     
+     function notify(type, text) {
+       return type == "success"
+         ? toast.success(text, {
+             position: "top-center",
+             autoClose: 5000,
+             hideProgressBar: false,
+             closeOnClick: true,
+             pauseOnHover: true,
+             draggable: true,
+             progress: undefined,
+           })
+         : toast.error(text, {
+             position: "top-center",
+             autoClose: 5000,
+             hideProgressBar: false,
+             closeOnClick: true,
+             pauseOnHover: true,
+             draggable: true,
+             progress: undefined,
+           });
+     }
        
    }
 
@@ -186,13 +214,24 @@ function Groups1() {
               </div>
               <div className="w-100 m-2 p-3 mt-3 card__btn">
                 <button
-                  type="submit"
                   className={`btn btn-primary btn__btn ${
                     isDark ? "dark__btn" : "light"
                   }`}
+                  // onClick={notify}
                 >
-                  {language.addNewGroup}
+                  {language.addNewStudent}
                 </button>
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                />
               </div>
             </div>
           </form>
@@ -239,13 +278,13 @@ function Groups1() {
                       />
                       <div className="">
                         <p className="card__p ">
-                          O’qituvchi:
+                          {language.teacher}:
                           <span className="card__span padding">
                             {e.teacher_name}
                           </span>
                         </p>
                         <p className="card__p">
-                          Tell raqam:{" "}
+                          {language.teacherTel}{" "}
                           <span className="card__span ">
                             +{e.teacher_phone}
                           </span>
@@ -253,19 +292,19 @@ function Groups1() {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">Dars kunlari:</p>
+                      <p className="card__p">{language.lessonDays}:</p>
                       <p className="card__span">{e.lesson_days}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">Dars vaqti:</p>
+                      <p className="card__p">{language.lessonTime}:</p>
                       <p className="card__span">{e.lesson_hours}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">O’quvchilar soni</p>
+                      <p className="card__p">{language.numberstudents}</p>
                       <p className="card__span">{e.studentAll.length}</p>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <p className="card__p">To’lov qilganlar</p>
+                      <p className="card__p">{language.thosePaid}</p>
                       <p className="card__span">{e.isPaid.length}</p>
                     </div>
                   </div>
