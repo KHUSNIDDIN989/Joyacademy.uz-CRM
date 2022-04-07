@@ -111,7 +111,7 @@ export const lang = {
     parentsTel: "Phone number of a parent",
     rasm: "Picture 3x4",
     all: "All:",
-    groupType: "Group type",
+    groupType: "Type of group",
     lessonDays: "Lesson days",
     lessonTime: "Lesson time",
     teacher: "Teacher",

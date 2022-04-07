@@ -140,7 +140,6 @@ export default function MiniDrawer() {
 
   //language
   const {currentLanguage : language} = useSelector(state => state.language);
-  console.log(language);
   const [menu, setMenu] = useState('report')
   useEffect(() => {
     switch (menu) {
@@ -233,7 +232,7 @@ export default function MiniDrawer() {
           style={{ background: "#2F49D1", height: "100vh", color: "#fff" }}
         >
           <List>
-            <ListItemButton className="active">
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setTitle(language.report);
@@ -246,12 +245,11 @@ export default function MiniDrawer() {
                 {language.report}
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setTitle(language.students);
                   setMenu("students");
-
                   setData("students");
                 }}
                 to="/studentes"
@@ -261,7 +259,7 @@ export default function MiniDrawer() {
                 {language.students}
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setTitle(language.groups);
@@ -275,7 +273,7 @@ export default function MiniDrawer() {
                 {language.groups}
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setMenu("payments");
@@ -289,7 +287,7 @@ export default function MiniDrawer() {
                 {language.payments}
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setMenu("attendence");
@@ -303,7 +301,7 @@ export default function MiniDrawer() {
                 {language.attendence}
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton className='item'>
               <NavLink
                 onClick={() => {
                   setMenu("attendence");

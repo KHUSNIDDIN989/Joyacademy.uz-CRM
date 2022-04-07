@@ -1,4 +1,3 @@
-import { Hidden } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import User from "../../assets/images/user.jpg";
@@ -15,9 +14,9 @@ function Attendance1() {
   const [students, setStudents] = useState([]);
   const language = useSelector(state => state.language.currentLanguage);
   const isDark = useSelector(state => state.isDark.bool);
+  const date = new Date();
+  const [attendance, setAttendance] = useState(0);
   
-  console.log(language)
-  console.log(id);
      useEffect(() => {
        fetch(`https://crm-joygroup.herokuapp.com/teachers`)
          .then((res) => res.json())
@@ -28,11 +27,9 @@ function Attendance1() {
              e.status = true;
              return e;
            }))
-           console.log(found, found.studentAll);
        
          });
      }, ['sd']);
-  console.log(students);
   const handleStatus = id => {
   
     let index = (students.findIndex((e) => e.student_id == id)) 
@@ -66,6 +63,15 @@ function Attendance1() {
          }
       });
   }
+  useEffect(() => {
+    fetch("https://crm-joygroup.herokuapp.com/attendances")
+      .then(res => res.json())
+      .then(data => {
+        const todaysAtt = data.filter(e => e.teacher_id == id);
+        console.log(todaysAtt);
+        todaysAtt.length ? setAttendance(todaysAtt) : setAttendance(0);
+      });
+  }, [])
    function notify(type, text) {
      return type == "success"
        ? toast.success(text, {
@@ -87,6 +93,7 @@ function Attendance1() {
            progress: undefined,
          });
    }
+  console.log(attendance);
   return (
     <div className="container">
       <div className="main mt-5 pt-4">
@@ -155,7 +162,9 @@ function Attendance1() {
                 <h3
                   className={`card__h3-h3 ${isDark ? "dark__title" : "light"}`}
                 >
-                  07.03.2022{" "}
+                  {`${(date.getDate() + "").padStart(2, 0)}.${(
+                    date.getDay() + ""
+                  ).padStart(2, "0")}.${date.getFullYear()}`}
                 </h3>
                 <p className={`card__h3-p ${isDark ? "dark__title" : "light"}`}>
                   {language.thoseAbsents}{" "}
@@ -163,18 +172,31 @@ function Attendance1() {
               </div>
               <div>
                 <ol className="mt-4">
-                  {students
-                    .filter((e) => e.status == false)
-                    .map((e, i) => (
-                      <li
-                        className={`not__attended ${
-                          isDark ? "dark__grey" : "light"
-                        }`}
-                        key={i}
-                      >
-                        {e.student_name}
-                      </li>
-                    ))}
+                  {!attendance
+                    ? students
+                        .filter((e) => e.status == false)
+                        .map((e, i) => (
+                          <li
+                            className={`not__attended ${
+                              isDark ? "dark__grey" : "light"
+                            }`}
+                            key={i}
+                          >
+                            {e.student_name}
+                          </li>
+                        ))
+                    : attendance
+                        .filter((e) => e.incoming_date == null)
+                        .map((e, i) => (
+                          <li
+                            className={`not__attended ${
+                              isDark ? "dark__grey" : "light"
+                            }`}
+                            key={i}
+                          >
+                            {e.student_name}
+                          </li>
+                        ))}
                 </ol>
               </div>
             </div>
@@ -212,49 +234,86 @@ function Attendance1() {
                   </tr>
                 </thead>
                 <tbody>
-                  {students.map((e, i) => (
-                    <tr
-                      key={i}
-                      className={
-                        i % 2
-                          ? isDark
-                            ? "dark__even"
-                            : "light"
-                          : isDark
-                          ? "dark__odd"
-                          : "light"
-                      }
-                    >
-                      <th
-                        className={isDark ? "dark__title" : "light"}
-                        scope="row"
-                      >
-                        {i + 1}
-                      </th>
-                      <td className={isDark ? "dark__title" : "light"}>
-                        {e.student_name}
-                      </td>
-                      <td className={isDark ? "dark__title" : "light"}>
-                        <button
-                          className="attendance_btn"
-                          onClick={() => {
-                            handleStatus(e.student_id);
-                          }}
+                  {!attendance
+                    ? students.map((e, i) => (
+                        <tr
+                          key={i}
+                          className={
+                            i % 2
+                              ? isDark
+                                ? "dark__even"
+                                : "light"
+                              : isDark
+                              ? "dark__odd"
+                              : "light"
+                          }
                         >
-                          {e.status ? <Checked /> : <Unchecked />}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                          <th
+                            className={isDark ? "dark__title" : "light"}
+                            scope="row"
+                          >
+                            {i + 1}
+                          </th>
+                          <td className={isDark ? "dark__title" : "light"}>
+                            {e.student_name}
+                          </td>
+                          <td className={isDark ? "dark__title" : "light"}>
+                            <button
+                              className="attendance_btn"
+                              onClick={() => {
+                                handleStatus(e.student_id);
+                              }}
+                            >
+                              {e.status ? <Checked /> : <Unchecked />}
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    : attendance.map((e, i) => (
+                        <tr
+                          key={i}
+                          className={
+                            i % 2
+                              ? isDark
+                                ? "dark__even"
+                                : "light"
+                              : isDark
+                              ? "dark__odd"
+                              : "light"
+                          }
+                        >
+                          <th
+                            className={isDark ? "dark__title" : "light"}
+                            scope="row"
+                          >
+                            {i + 1}
+                          </th>
+                          <td className={isDark ? "dark__title" : "light"}>
+                            {e.student_name}
+                          </td>
+                          <td className={isDark ? "dark__title" : "light"}>
+                            {e.incoming_date ? (
+                              <Checked />
+                            ) : (
+                              <div className="not__came">
+                              <Unchecked/>
+                                <span className="not__came--x">X</span>
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
             </div>
-           
+
             <div className="w-100 m-2 p-3 mt-3 card__btn">
               <button
+                type="button"
                 className={`btn btn-primary btn__btn ${
                   isDark ? "dark__btn" : "light"
-                }`}
+                  }`}
+                style={{display:`${attendance?"none":"block"}`}}
                 onClick={sendAttendance}
               >
                 {language.save}

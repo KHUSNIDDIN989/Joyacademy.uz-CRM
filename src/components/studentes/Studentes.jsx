@@ -19,7 +19,7 @@ function Studentes() {
   const [hendleDelete, setHendleDelete] = useState("");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(false);
 
 console.log(students)
    
@@ -56,7 +56,7 @@ console.log(students)
     }
       
     
-
+     setPosts(!posts)
     // setPhoneNumber(e.target.number.value);
     // setOption(e.target.select.value);
     // setParentName(e.target.parentName.value);
