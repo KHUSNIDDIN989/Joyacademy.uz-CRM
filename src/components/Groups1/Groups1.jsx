@@ -3,45 +3,52 @@ import SearchIcon from "@mui/icons-material/Search";
 import User from "../../assets/images/user.jpg";
 import "./Groups1.css";
 import { useSelector } from "react-redux";
-import {useEffect} from 'react'
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Groups1() {
-  const language = useSelector(state => state.language.currentLanguage);
+  const language = useSelector((state) => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
   const [teachers, setTeachers] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [groups, setGroups] = useState([]);
   const [toggle, setToggle] = useState(false);
-     useEffect(() => {
-       fetch(`https://crm-joygroup.herokuapp.com/teachers?search=${search}`)
-         .then((res) => res.json())
-         .then((data) => {
-           setTeachers(data);
-           console.log(data)
-         });
-     }, [search, toggle]);
-    useEffect(() => {
-      fetch(`https://crm-joygroup.herokuapp.com/groups`)
-        .then((res) => res.json())
-        .then((data) =>
-        {
-          setGroups(data)
-          console.log(data)
-        });
-    }, []);
+  const [message, setMessage] = useState('')
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/teachers?search=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTeachers(data);
+        console.log(data);
+      });
+  }, [search, toggle, message]);
+  useEffect(() => {
+    fetch(`https://crm-joygroup.herokuapp.com/groups`)
+      .then((res) => res.json())
+      .then((data) => {
+        setGroups(data);
+        console.log(data);
+      });
+  }, []);
   const sendGroup = async (e) => {
     e.preventDefault();
-    console.log('sent')
-    const { groupID, lessonDays, lessonTime, teacherName, teacherTel, teacherImg } = e.target.elements;
+    console.log("sent");
+    const {
+      groupID,
+      lessonDays,
+      lessonTime,
+      teacherName,
+      teacherTel,
+      teacherImg,
+    } = e.target.elements;
     const newGroup = {
       teacher_name: teacherName.value,
       teacher_phone: teacherTel.value,
       lesson_days: lessonDays.value,
       lesson_hours: lessonTime.value,
       group_id: Number(groupID.value),
-      teacher_profile_img: teacherImg.files[0]
+      teacher_profile_img: teacherImg.files[0],
     };
     const form = new FormData();
     form.append("teacher_name", teacherName.value);
@@ -51,45 +58,42 @@ function Groups1() {
     form.append("group_id", groupID.value);
     form.append("file", teacherImg.files[0]);
     console.log(form, newGroup);
-      
-      
-     
+
     const res = await fetch(`https://crm-joygroup.herokuapp.com/teachers`, {
       method: "POST",
-      
+
       body: form,
     });
-    const message =await res.json();
+    const message = await res.json();
+    setMessage(message)
     if (message.status == 200 || message.status == 201) {
       notify("success", "Qabul qilindi!");
     } else {
       notify("error", "Xatolik,  qayta urinib ko'ring!");
     }
-      
-     
-     function notify(type, text) {
-       return type == "success"
-         ? toast.success(text, {
-             position: "top-center",
-             autoClose: 5000,
-             hideProgressBar: false,
-             closeOnClick: true,
-             pauseOnHover: true,
-             draggable: true,
-             progress: undefined,
-           })
-         : toast.error(text, {
-             position: "top-center",
-             autoClose: 5000,
-             hideProgressBar: false,
-             closeOnClick: true,
-             pauseOnHover: true,
-             draggable: true,
-             progress: undefined,
-           });
-     }
-       
-   }
+
+    function notify(type, text) {
+      return type == "success"
+        ? toast.success(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
+        : toast.error(text, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+    }
+  };
 
   return (
     <div className="container">
@@ -219,7 +223,7 @@ function Groups1() {
                   }`}
                   // onClick={notify}
                 >
-                  {language.addNewStudent}
+                  {language.addNewGroup}
                 </button>
                 <ToastContainer
                   position="bottom-center"
@@ -243,11 +247,11 @@ function Groups1() {
           <div className="col__img-input">
             <SearchIcon className="col__search" />
             <input
-              type="text"
+              type="search"
+              placeholder="Qidiruv"
               className={`col__input ${isDark ? "dark__btn" : "light"}`}
               onChange={(e) => {
                 setSearch(e.target.value);
-                console.log(e.target.value);
               }}
             />
           </div>

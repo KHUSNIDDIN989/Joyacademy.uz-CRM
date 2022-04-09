@@ -17,8 +17,9 @@ function Payments() {
   const [student, setStudent] = useState([]);
   const [search, setSearch] = useState('');
   const [toggle, setToggle] = useState(false);
+  const [page, setPage] = useState(1);
+
   const tel = useRef();
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
       useEffect(() => {
         fetch(`https://crm-joygroup.herokuapp.com/payments?search=${search}`)
@@ -27,7 +28,7 @@ function Payments() {
             setPayment(data);
             console.log(data);
           });
-      }, [search, toggle]);
+      }, [search, toggle, page]);
          useEffect(() => {
            fetch(`https://crm-joygroup.herokuapp.com/groups/active`)
              .then((res) => res.json())
@@ -227,7 +228,7 @@ function Payments() {
                     }`}
                     // onClick={notify}
                   >
-                    {language.addNewStudent}
+                    {language.paymentTitle}
                   </button>
                   <ToastContainer
                     position="bottom-center"
@@ -390,11 +391,17 @@ function Payments() {
           </div>
         </div>
         <div className="col-md-12 d-flex justify-content-end align-items-center my-5">
-          <p className={`pt-3 col__jami ${isDark ? "dark__title" : "light"}`}>
-            JAMI 100 ta
-          </p>
-          <Stack spacing={2} className="mr-5 pr-5">
-            <Pagination count={10} color="primary" />
+        <Stack
+            spacing={2}
+            className={` mr-5 pr-5 ${isDark ? "dark__title" : "light"}`}
+          >
+            <Pagination
+              count={payment.length || 100}
+              color="primary"
+              defaultValue={1}
+              className={` mr-5 pr-5 ${isDark ? "dark__title" : "light"}`}
+              onChange={(e) => setPage(e.target.textContent)}
+            />
           </Stack>
         </div>
       </div>

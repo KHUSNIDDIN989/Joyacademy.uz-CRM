@@ -15,6 +15,7 @@ function Home() {
         setStatistics(data)
       });
   }, [])
+  console.log(statistics);
   return (
     <div className="container">
       <div className="col-md-12 mt-5 pt-5">

@@ -89,10 +89,6 @@ function Attendance() {
                       <p className="card__p">{language.numberstudents}</p>
                       <p className="card__span">{e.studentAll.length}</p>
                     </div>
-                    <div className="d-flex justify-content-between">
-                      <p className="card__p">{language.thosePaid}</p>
-                      <p className="card__span">{e.isPaid.length}</p>
-                    </div>
                   </div>
                 </div>
               </NavLink>

@@ -21,7 +21,7 @@ function Studentes() {
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState(false);
 
-console.log(students)
+
    
   useEffect(() => {
     fetch(
@@ -31,7 +31,7 @@ console.log(students)
       .then((data) => setStudents(data));
   }, [search, page, posts, hendleDelete]);
 
-  console.log(hendleDelete);
+  console.log(search);
 
   const PostForm = async(e) => {
     e.preventDefault();
@@ -77,13 +77,6 @@ console.log(students)
       });
   };
 
-  const hendleSearch = (e) => {
-    e.preventDefault();
-
-    setSearch(e.target.search.value);
-
-    e.target.search.value = "";
-  };
   //language 
   const language = useSelector((state) => state.language.currentLanguage);
   const isDark = useSelector((state) => state.isDark.bool);
@@ -259,9 +252,10 @@ console.log(students)
           <h3 className={`col__h3 ${isDark ? "dark__title" : "light"}`}>
             {language.ourStudents}
           </h3>
-          <form onSubmit={(e) => hendleSearch(e)} className="col__img-input">
+          <form className="col__img-input">
             <SearchIcon className={`col__search `} />
             <input
+              onChange={(e) => setSearch(e.target.value)}
               name="search"
               type="search"
               className={`col__input ${isDark ? "dark__btn" : "light"}`}
