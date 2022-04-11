@@ -5,3 +5,13 @@
 .col__input{
     padding: 0 10px;
 }
+.student__img{
+    margin-right: 15px;
+    transition: .5s;
+}
+.student__img:hover{
+    position: relative;
+    transition: .5s;
+transform: scale(3) rotate(360deg) translateX(20px) translateY(20px);
+z-index: 100 !important;
+}

@@ -40,6 +40,7 @@ import "./SideNav.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { appealActions } from "../store/Slices/AppealSlice";
 import ThemeMode from "../ThemeMode/ThemeMode";
+import GroupsEdit from "../Groups1/GroupsEdit";
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -330,6 +331,7 @@ export default function MiniDrawer() {
           <Route path="/attendance/" element={<Attendance />} />
           <Route path="/attendance1/:id" element={<Attendance1 />} />
           <Route path="/application" element={<Application />} />
+          <Route path="/groups-edit/:id" element={<GroupsEdit/>}/>
         </Routes>
       </div>
     </Box>

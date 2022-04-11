@@ -16,6 +16,7 @@ function Attendance1() {
   const isDark = useSelector(state => state.isDark.bool);
   const date = new Date();
   const [attendance, setAttendance] = useState(0);
+  const [toggle, setToggle] = useState(false);
   
      useEffect(() => {
        fetch(`https://crm-joygroup.herokuapp.com/teachers`)
@@ -58,6 +59,7 @@ function Attendance1() {
         console.log(data);
          if (data.status == 200 || data.status == 201) {
            notify("success", "Qabul qilindi!");
+           setToggle(!toggle);
          } else {
            notify("error", "Xatolik,  qayta urinib ko'ring!");
          }
@@ -71,7 +73,7 @@ function Attendance1() {
         console.log(todaysAtt);
         todaysAtt.length ? setAttendance(todaysAtt) : setAttendance(0);
       });
-  }, [])
+  }, [toggle])
    function notify(type, text) {
      return type == "success"
        ? toast.success(text, {

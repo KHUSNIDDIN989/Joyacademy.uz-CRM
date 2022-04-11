@@ -8,6 +8,7 @@ import "./Studentes.css";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import img from '../../assets/images/user.jpg'
 function Studentes() {
   const [students, setStudents] = useState([]);
   const [studentName, setStudentName] = useState("");
@@ -32,7 +33,7 @@ console.log(students)
   }, [search, page, posts, hendleDelete]);
 
   console.log(hendleDelete);
-
+console.log(students);
   const PostForm = async(e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -325,7 +326,14 @@ console.log(students)
                         >
                           {index + 1}
                         </th>
-                        <td className={isDark ? "dark__title" : "light"}>
+                        <td style={{"position":"relative"}} className={isDark ? "dark__title" : "light"}>
+                          <img
+                            className="student__img"
+                            width={50}
+                            height={50}
+                            src={img}
+                            alt={i.student_profile_img}
+                          />
                           {i.student_name}
                         </td>
                         <td className={isDark ? "dark__title" : "light"}>

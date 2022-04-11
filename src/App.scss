@@ -24,6 +24,12 @@
 .container{
   width: 1120px!important;
 }
+.row{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  
+
+}
 .dark{
   background-color: #161624 !important;
   transition: .5s ease-out;
@@ -100,7 +106,10 @@
     }
   }
   &__grey{
-    color: rgba($color: #fff, $alpha: .7)
+    color: rgba($color: #fff, $alpha: .7);
+    &:hover{
+      color: rgba($color: #FFFFFF, $alpha: 1.0);
+    }
   }
 }
 .light{

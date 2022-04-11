@@ -11,7 +11,6 @@ function Attendance() {
   const isDark = useSelector((state) => state.isDark.bool);
   const [teacher, setTeacher] = useState([]);
   const [search, setSearch] = useState('')
-  let arr = [1, 2, 3, 4, 5, 6];
    useEffect(() => {
      fetch(`https://crm-joygroup.herokuapp.com/teachers?search=${search}`)
        .then((res) => res.json())

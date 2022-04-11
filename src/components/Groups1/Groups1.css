@@ -83,4 +83,20 @@
     line-height: 24px;
     color: #00072d;
   }
-  
+  .button__group{
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .edit__form{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end;
+  }
+  .edit__right{
+    padding-left: 50px !important;
+  }

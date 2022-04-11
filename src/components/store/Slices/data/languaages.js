@@ -42,7 +42,9 @@ export const lang = {
     appeals_time: "Kun",
     name: "To'liq ismi",
     delete: "O'chirish",
-    save:"Saqalsh"
+    save: "Saqalsh",
+    edit: "Guruhni o'zgartirish",
+    submit: "Jo'natish",
   },
   ru: {
     report: "Отчет",
@@ -88,6 +90,8 @@ export const lang = {
     appeals_time: "Дата",
     delete: "Удалить",
     save: "Сохранять",
+    edit: "Изменить группу",
+    submit: "Отправить",
   },
   en: {
     report: "Report",
@@ -133,5 +137,7 @@ export const lang = {
     appeals_time: "Date",
     delete: "Delete",
     save: "Save",
+    edit: "Edit group",
+    submit: "Submit",
   },
 };

@@ -227,7 +227,7 @@ function Payments() {
                     }`}
                     // onClick={notify}
                   >
-                    {language.addNewStudent}
+                    {language.paymentTitle}
                   </button>
                   <ToastContainer
                     position="bottom-center"
